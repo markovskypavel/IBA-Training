@@ -1,9 +1,12 @@
 package by.iba.markovsky.festivalorganisation.domain.entity;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-public class Activity {
+public class Activity implements Serializable {
+
+    private static final long serialVersionUID = -6763387266714169960L;
 
     private ActivityType activityType = ActivityType.FESTIVAL;
     private String name;

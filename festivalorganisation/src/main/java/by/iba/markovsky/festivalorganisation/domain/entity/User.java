@@ -4,6 +4,8 @@ import java.util.Objects;
 
 public class User extends Human {
 
+    private static final long serialVersionUID = -8032417545535246095L;
+
     private String username;
     private String password;
     private String email;

@@ -8,22 +8,15 @@ import java.util.List;
 
 public class AddArtistService {
 
-    List<Artist> artists = new ArrayList<>();
+    private List<Artist> artists = new ArrayList<>();
 
-    public boolean addArtist(String name, String genre) {
-        try {
-            Artist artist = new Artist(name, genre);
-            if (checkExist(artist)) {
-                throw new ExistException("Artist exist.");
-            }
-            artists.add(artist);
-            return true;
-        } catch (ExistException ee) {
-            System.out.println(ee.getMessage());
+    public void addArtist(String name, String genre) throws ExistException {
+        Artist artist = new Artist(name, genre);
+        if (checkExist(artist)) {
+            throw new ExistException("Artist exists");
         }
-        return false;
+        artists.add(artist);
     }
-
     private boolean checkExist(Artist newArtist) {
         for (Artist a : artists) {
             if (a.getName().equals(newArtist.getName())) {
@@ -32,7 +25,6 @@ public class AddArtistService {
         }
         return false;
     }
-
     public List<Artist> getArtists() {
         return artists;
     }

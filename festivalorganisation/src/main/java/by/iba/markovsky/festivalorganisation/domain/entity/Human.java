@@ -1,8 +1,11 @@
 package by.iba.markovsky.festivalorganisation.domain.entity;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public abstract class Human {
+public abstract class Human implements Serializable {
+
+    private static final long serialVersionUID = -9067795085382175260L;
 
     protected String name;
     protected String surname;

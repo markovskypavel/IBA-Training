@@ -1,8 +1,11 @@
 package by.iba.markovsky.festivalorganisation.domain.entity;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Artist {
+public class Artist implements Serializable {
+
+    private static final long serialVersionUID = -4225549571954368009L;
 
     private String name;
     private String genre;

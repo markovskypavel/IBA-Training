@@ -4,13 +4,11 @@ import by.iba.markovsky.festivalorganisation.domain.entity.Place;
 
 public class AddPlaceService {
 
-    Place place;
+    private Place place = null;
 
-    public boolean addPlace(String address, int capacity) {
+    public void addPlace(String address, int capacity) {
         place = new Place(address, capacity);
-        return true;
     }
-
     public Place getPlace() {
         return place;
     }

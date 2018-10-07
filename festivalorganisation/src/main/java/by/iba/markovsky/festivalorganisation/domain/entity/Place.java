@@ -1,8 +1,11 @@
 package by.iba.markovsky.festivalorganisation.domain.entity;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Place {
+public class Place implements Serializable {
+
+    private static final long serialVersionUID = -4969750303078456088L;
 
     private String address;
     private int capacity;

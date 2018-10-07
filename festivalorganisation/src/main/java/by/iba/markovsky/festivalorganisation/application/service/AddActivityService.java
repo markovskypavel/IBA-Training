@@ -7,17 +7,17 @@ import java.util.List;
 
 public class AddActivityService {
 
-    public Activity addAdctivity(ActivityType activityType, String name, Place place, List<User> participants, List<Artist> artists, String description){
-        try {
-            Activity activity = new Activity(activityType, name, place, participants, artists, description);
-            if (activity.getPlace().getCapacity() < activity.getParticipants().size()) {
-                throw new LimitException("Capacity is less than participants quantity");
-            }
-            return activity;
-        }catch(LimitException le){
-            System.out.println(le.getMessage());
+    private Activity activity = null;
+
+    public void addAdctivity(ActivityType activityType, String name, Place place, List<User> participants,
+                                 List<Artist> artists, String description) throws LimitException {
+        if (place.getCapacity() < participants.size()) {
+            throw new LimitException("Capacity is less than participants quantity");
         }
-        return null;
+        activity = new Activity(activityType, name, place, participants, artists, description);
+    }
+    public Activity getActivity() {
+        return activity;
     }
 
 }

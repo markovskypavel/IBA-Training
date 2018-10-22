@@ -20,7 +20,7 @@ public class AddParticipantService {
     }
     private boolean checkExist(User newParticipant) {
         for (User participant : participants) {
-            if (participant.getUsername().equals(newParticipant.getUsername())) {
+            if (participant.getWebIdentity().getUsername().equals(newParticipant.getWebIdentity().getUsername())) {
                 return true;
             }
         }

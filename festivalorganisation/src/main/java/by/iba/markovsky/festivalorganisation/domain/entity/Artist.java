@@ -7,11 +7,14 @@ public class Artist implements Serializable {
 
     private static final long serialVersionUID = -4225549571954368009L;
 
+    private int id;
+
+    private Activity activity;
+
     private String name;
     private String genre;
 
     public Artist() {
-
     }
     public Artist(String name, String genre) {
         this.name = name;
@@ -23,6 +26,9 @@ public class Artist implements Serializable {
     }
 
     //Setters
+    public void setActivity(Activity activity) {
+        this.activity = activity;
+    }
     public void setName(String name) {
         this.name = name;
     }
@@ -31,6 +37,12 @@ public class Artist implements Serializable {
     }
 
     //Getters
+    public int getId() {
+        return id;
+    }
+    public Activity getActivity() {
+        return activity;
+    }
     public String getName() {
         return name;
     }
@@ -43,17 +55,19 @@ public class Artist implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Artist artist = (Artist) o;
-        return Objects.equals(name, artist.name) &&
+        return id == artist.id &&
+                Objects.equals(name, artist.name) &&
                 Objects.equals(genre, artist.genre);
     }
     @Override
     public int hashCode() {
-        return Objects.hash(name, genre);
+        return Objects.hash(id, name, genre);
     }
     @Override
     public String toString() {
         return "Artist{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", genre='" + genre + '\'' +
                 '}';
     }

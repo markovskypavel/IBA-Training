@@ -8,12 +8,14 @@ public class Activity implements Serializable {
 
     private static final long serialVersionUID = -6763387266714169960L;
 
+    private int id;
+
     private ActivityType activityType = ActivityType.FESTIVAL;
     private String name;
-    private Place place; //Agregation
-    private List<User> participants; //Agregation
-    private List<Artist> artists; //Agregation
-    private String description; //Agregation
+    private Place place;
+    private List<User> participants;
+    private List<Artist> artists;
+    private String description;
 
     public Activity() {
 
@@ -36,6 +38,7 @@ public class Activity implements Serializable {
     }
 
     //Setters
+
     public void setActivityType(ActivityType activityType) {
         this.activityType = activityType;
     }
@@ -59,6 +62,9 @@ public class Activity implements Serializable {
     }
 
     //Getters
+    public int getId() {
+        return id;
+    }
     public ActivityType getActivityType() {
         return activityType;
     }
@@ -83,7 +89,8 @@ public class Activity implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Activity activity = (Activity) o;
-        return activityType == activity.activityType &&
+        return id == activity.id &&
+                activityType == activity.activityType &&
                 Objects.equals(name, activity.name) &&
                 Objects.equals(place, activity.place) &&
                 Objects.equals(participants, activity.participants) &&
@@ -92,12 +99,13 @@ public class Activity implements Serializable {
     }
     @Override
     public int hashCode() {
-        return Objects.hash(activityType, name, place, participants, artists, description);
+        return Objects.hash(id, activityType, name, place, participants, artists, description);
     }
     @Override
     public String toString() {
         return "Activity{" +
-                "activityType=" + activityType +
+                "id=" + id +
+                ", activityType=" + activityType +
                 ", name='" + name + '\'' +
                 ", place=" + place +
                 ", participants=" + participants +

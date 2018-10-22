@@ -3,21 +3,27 @@ package by.iba.markovsky.festivalorganisation.domain.entity;
 import java.io.Serializable;
 import java.util.Objects;
 
-public abstract class Human implements Serializable {
+public class Identity implements Serializable {
 
-    private static final long serialVersionUID = -9067795085382175260L;
+    private static final long serialVersionUID = -3354880957250012160L;
 
-    protected String name;
-    protected String surname;
-    protected int age;
+    private int id;
 
-    public Human() {
+    private String name;
+    private String surname;
+    private int age;
 
+    public Identity() {
     }
-    public Human(String name, String surname, int age) {
+    public Identity(String name, String surname, int age) {
         this.name = name;
         this.surname = surname;
         this.age = age;
+    }
+    public Identity(Identity identity) {
+        this.name = identity.name;
+        this.surname = identity.surname;
+        this.age = identity.age;
     }
 
     //Setters
@@ -32,6 +38,9 @@ public abstract class Human implements Serializable {
     }
 
     //Getters
+    public int getId() {
+        return id;
+    }
     public String getName() {
         return name;
     }
@@ -46,19 +55,21 @@ public abstract class Human implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Human human = (Human) o;
-        return age == human.age &&
-                Objects.equals(name, human.name) &&
-                Objects.equals(surname, human.surname);
+        Identity identity = (Identity) o;
+        return id == identity.id &&
+                age == identity.age &&
+                Objects.equals(name, identity.name) &&
+                Objects.equals(surname, identity.surname);
     }
     @Override
     public int hashCode() {
-        return Objects.hash(name, surname, age);
+        return Objects.hash(id, name, surname, age);
     }
     @Override
     public String toString() {
-        return "Human{" +
-                "name='" + name + '\'' +
+        return "Identity{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", age=" + age +
                 '}';

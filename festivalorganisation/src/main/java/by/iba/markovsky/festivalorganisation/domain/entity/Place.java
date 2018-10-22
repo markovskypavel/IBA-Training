@@ -7,11 +7,12 @@ public class Place implements Serializable {
 
     private static final long serialVersionUID = -4969750303078456088L;
 
+    private int id;
+
     private String address;
     private int capacity;
 
     public Place() {
-
     }
     public Place(String address, int capacity) {
         this.address = address;
@@ -31,6 +32,9 @@ public class Place implements Serializable {
     }
 
     //Getters
+    public int getId() {
+        return id;
+    }
     public String getAddress() {
         return address;
     }
@@ -43,17 +47,19 @@ public class Place implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Place place = (Place) o;
-        return capacity == place.capacity &&
+        return id == place.id &&
+                capacity == place.capacity &&
                 Objects.equals(address, place.address);
     }
     @Override
     public int hashCode() {
-        return Objects.hash(address, capacity);
+        return Objects.hash(id, address, capacity);
     }
     @Override
     public String toString() {
         return "Place{" +
-                "address='" + address + '\'' +
+                "id=" + id +
+                ", address='" + address + '\'' +
                 ", capacity=" + capacity +
                 '}';
     }

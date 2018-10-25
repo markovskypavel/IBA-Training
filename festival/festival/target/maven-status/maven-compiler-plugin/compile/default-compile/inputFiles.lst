@@ -31,12 +31,15 @@ D:\Programming\IBA Java Web Development Training\festival\festival\src\main\java
 D:\Programming\IBA Java Web Development Training\festival\festival\src\main\java\by\iba\markovsky\festivalorganisation\model\entity\WebIdentity.java
 D:\Programming\IBA Java Web Development Training\festival\festival\src\main\java\by\iba\markovsky\festivalorganisation\util\EncodingFilter.java
 D:\Programming\IBA Java Web Development Training\festival\festival\src\main\java\by\iba\markovsky\festivalorganisation\model\data\list\CustomList.java
+D:\Programming\IBA Java Web Development Training\festival\festival\src\main\java\by\iba\markovsky\festivalorganisation\repository\impl\hibernate\DAOHibernateWebIdentity.java
+D:\Programming\IBA Java Web Development Training\festival\festival\src\main\java\by\iba\markovsky\festivalorganisation\repository\impl\hibernate\DAOHIbernateArtist.java
 D:\Programming\IBA Java Web Development Training\festival\festival\src\main\java\by\iba\markovsky\festivalorganisation\model\data\tree\CustomTree.java
 D:\Programming\IBA Java Web Development Training\festival\festival\src\main\java\by\iba\markovsky\festivalorganisation\repository\impl\connection\DAOAbstract.java
 D:\Programming\IBA Java Web Development Training\festival\festival\src\main\java\by\iba\markovsky\festivalorganisation\constant\Constant.java
 D:\Programming\IBA Java Web Development Training\festival\festival\src\main\java\by\iba\markovsky\festivalorganisation\model\data\list\CustomLinkedList.java
 D:\Programming\IBA Java Web Development Training\festival\festival\src\main\java\by\iba\markovsky\festivalorganisation\repository\impl\connection\DAOPlace.java
 D:\Programming\IBA Java Web Development Training\festival\festival\src\main\java\by\iba\markovsky\festivalorganisation\service\ActivityService.java
+D:\Programming\IBA Java Web Development Training\festival\festival\src\main\java\by\iba\markovsky\festivalorganisation\repository\impl\hibernate\DAOHibernateIdentity.java
 D:\Programming\IBA Java Web Development Training\festival\festival\src\main\java\by\iba\markovsky\festivalorganisation\model\data\queue\CustomArrayQueue.java
 D:\Programming\IBA Java Web Development Training\festival\festival\src\main\java\by\iba\markovsky\festivalorganisation\validation\PlaceValidator.java
 D:\Programming\IBA Java Web Development Training\festival\festival\src\main\java\by\iba\markovsky\festivalorganisation\model\data\stack\CustomListStack.java
@@ -52,6 +55,7 @@ D:\Programming\IBA Java Web Development Training\festival\festival\src\main\java
 D:\Programming\IBA Java Web Development Training\festival\festival\src\main\java\by\iba\markovsky\festivalorganisation\constant\TableCol.java
 D:\Programming\IBA Java Web Development Training\festival\festival\src\main\java\by\iba\markovsky\festivalorganisation\exception\CustomTreeEmptyException.java
 D:\Programming\IBA Java Web Development Training\festival\festival\src\main\java\by\iba\markovsky\festivalorganisation\repository\DAO.java
+D:\Programming\IBA Java Web Development Training\festival\festival\src\main\java\by\iba\markovsky\festivalorganisation\repository\impl\hibernate\DAOHibernateActivity.java
 D:\Programming\IBA Java Web Development Training\festival\festival\src\main\java\by\iba\markovsky\festivalorganisation\validation\ActivityValidator.java
 D:\Programming\IBA Java Web Development Training\festival\festival\src\main\java\by\iba\markovsky\festivalorganisation\repository\impl\hibernate\DAOHibernatePlace.java
 D:\Programming\IBA Java Web Development Training\festival\festival\src\main\java\by\iba\markovsky\festivalorganisation\model\data\collection\CustomAbstractCollection.java

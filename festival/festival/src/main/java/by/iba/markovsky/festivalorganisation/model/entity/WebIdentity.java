@@ -1,23 +1,51 @@
 package by.iba.markovsky.festivalorganisation.model.entity;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@Entity
+@Table(name = "WebIdentity")
 public class WebIdentity implements Serializable {
 
     private static final long serialVersionUID = 3276480509050536113L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "webIdentity_id", unique = true, updatable = false)
     private int id;
 
+    @Column(name = "username", nullable = false)
     private String username;
+
+    @Column(name = "password", nullable = false)
     private String password;
+
+    @Column(name = "email", nullable = false)
     private String email;
+
+    @Column(name = "telephone")
     private String telephone;
+
+    @Column(name = "status", nullable = false)
     private boolean status; //Admin or Simple user
 
+    @ManyToOne(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    @JoinColumn(name = "identity_id", nullable = false)
     private Identity identity;
-    private List<Activity> activities;
+
+    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER, mappedBy = "users")
+    @Fetch(value = FetchMode.SUBSELECT)
+/*    @LazyCollection(LazyCollectionOption.TRUE)*/
+    @Transient
+    private List<Activity> activities = new ArrayList<>();
 
     public WebIdentity() {
     }

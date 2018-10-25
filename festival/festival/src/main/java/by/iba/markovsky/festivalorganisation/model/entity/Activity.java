@@ -1,28 +1,62 @@
 package by.iba.markovsky.festivalorganisation.model.entity;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+@Entity
+@Table(name = "Activity")
 public class Activity implements Serializable {
 
     private static final long serialVersionUID = -6763387266714169960L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "activity_id", unique = true, updatable = false)
     private int id;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "activityType", nullable = false)
     private ActivityType activityType = ActivityType.FESTIVAL;
+
+    @Column(name = "name", nullable = false)
     private String name;
-    private Place place;
-    private List<WebIdentity> users;
-    private List<Artist> artists;
+
+    @Column(name = "description")
     private String description;
+
+    @Column(name = "date")
     private Date date;
 
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+    @JoinColumn(name = "place_id", nullable = false)
+    private Place place;
+
+    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER )
+    @Fetch(value = FetchMode.SUBSELECT)
+    @JoinTable(
+            name="Activity_has_WebIdentity",
+            joinColumns = {@JoinColumn(name="activity_id")},
+            inverseJoinColumns = {@JoinColumn(name="webIdentity_id")}
+    )
+    private List<WebIdentity> users = new ArrayList<>();
+
+    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER )
+    @Fetch(value = FetchMode.SUBSELECT)
+    @JoinTable(
+            name="Activity_has_Artist",
+            joinColumns = {@JoinColumn(name="activity_id")},
+            inverseJoinColumns = {@JoinColumn(name="artist_id")}
+    )
+    private List<Artist> artists = new ArrayList<>();
+
     public Activity() {
-        this.artists = new ArrayList<>();
-        this.users = new ArrayList<>();
     }
     public Activity(int id, ActivityType activityType, String name, int idPlace, String description, Date date) {
         this.id = id;

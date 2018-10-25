@@ -1,19 +1,38 @@
 package by.iba.markovsky.festivalorganisation.model.entity;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@Entity
+@Table(name = "Artist")
 public class Artist implements Serializable {
 
     private static final long serialVersionUID = -4225549571954368009L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "artist_id", unique = true, updatable = false)
     private int id;
 
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "genre")
     private String genre;
 
-    private List<Activity> activities;
+    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER, mappedBy = "artists")
+    @Fetch(value = FetchMode.SUBSELECT)
+/*    @LazyCollection(LazyCollectionOption.TRUE)*/
+    @Transient
+    private List<Activity> activities = new ArrayList<>();
 
     public Artist() {
     }

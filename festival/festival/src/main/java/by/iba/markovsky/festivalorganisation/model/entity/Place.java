@@ -1,15 +1,24 @@
 package by.iba.markovsky.festivalorganisation.model.entity;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
+@Entity
+@Table(name = "Place")
 public class Place implements Serializable {
 
     private static final long serialVersionUID = -4969750303078456088L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "place_id", unique = true, updatable = false)
     private int id;
 
+    @Column(name = "address", nullable = false)
     private String address;
+
+    @Column(name = "capacity", nullable = false)
     private int capacity;
 
     public Place() {

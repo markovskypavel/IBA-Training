@@ -7,6 +7,7 @@ by\iba\markovsky\festivalorganisation\model\data\collection\CustomAbstractFixedL
 by\iba\markovsky\festivalorganisation\repository\impl\connection\DAOAbstract.class
 by\iba\markovsky\festivalorganisation\repository\impl\connection\DAOWebIdentity.class
 by\iba\markovsky\festivalorganisation\controller\Controller.class
+by\iba\markovsky\festivalorganisation\repository\impl\hibernate\DAOHIbernateArtist.class
 by\iba\markovsky\festivalorganisation\model\data\list\CustomLinkedList.class
 by\iba\markovsky\festivalorganisation\repository\impl\connection\DAOActivity.class
 by\iba\markovsky\festivalorganisation\exception\CustomTreeEmptyException.class
@@ -18,6 +19,7 @@ by\iba\markovsky\festivalorganisation\model\data\collection\CustomAbstractFixedC
 by\iba\markovsky\festivalorganisation\validation\ArtistValidator.class
 by\iba\markovsky\festivalorganisation\repository\impl\connection\DAOIdentity.class
 by\iba\markovsky\festivalorganisation\model\entity\ActivityType.class
+by\iba\markovsky\festivalorganisation\repository\impl\hibernate\DAOHibernateWebIdentity.class
 by\iba\markovsky\festivalorganisation\model\data\list\CustomArrayList.class
 by\iba\markovsky\festivalorganisation\repository\impl\connection\DAOArtist.class
 by\iba\markovsky\festivalorganisation\model\data\list\CustomAbstractList.class
@@ -43,11 +45,13 @@ by\iba\markovsky\festivalorganisation\configuration\DatabaseConfiguration.class
 by\iba\markovsky\festivalorganisation\model\data\list\CustomList.class
 by\iba\markovsky\festivalorganisation\model\data\tree\CustomTree.class
 by\iba\markovsky\festivalorganisation\model\entity\Place.class
+by\iba\markovsky\festivalorganisation\repository\impl\hibernate\DAOHibernateActivity.class
 by\iba\markovsky\festivalorganisation\util\database\HibernateUtil.class
 by\iba\markovsky\festivalorganisation\validation\PlaceValidator.class
 by\iba\markovsky\festivalorganisation\view\View.class
 by\iba\markovsky\festivalorganisation\model\data\tree\CustomBinaryTree$Node.class
 by\iba\markovsky\festivalorganisation\exception\CustomContainerEmptyException.class
+by\iba\markovsky\festivalorganisation\repository\impl\hibernate\DAOHibernateIdentity.class
 by\iba\markovsky\festivalorganisation\model\data\collection\CustomAbstractFixedArrayCollection$1.class
 by\iba\markovsky\festivalorganisation\controller\StringTest.class
 by\iba\markovsky\festivalorganisation\model\entity\Identity.class

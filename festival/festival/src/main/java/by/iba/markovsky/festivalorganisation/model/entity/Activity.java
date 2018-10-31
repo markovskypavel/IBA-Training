@@ -5,10 +5,7 @@ import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 @Table(name = "Activity")
@@ -38,23 +35,21 @@ public class Activity implements Serializable {
     @JoinColumn(name = "place_id", nullable = false)
     private Place place;
 
-    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER )
-    @Fetch(value = FetchMode.SUBSELECT)
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER )
     @JoinTable(
             name="Activity_has_WebIdentity",
             joinColumns = {@JoinColumn(name="activity_id")},
             inverseJoinColumns = {@JoinColumn(name="webIdentity_id")}
     )
-    private List<WebIdentity> users = new ArrayList<>();
+    private Set<WebIdentity> users = new HashSet<>();
 
-    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER )
-    @Fetch(value = FetchMode.SUBSELECT)
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER )
     @JoinTable(
             name="Activity_has_Artist",
             joinColumns = {@JoinColumn(name="activity_id")},
             inverseJoinColumns = {@JoinColumn(name="artist_id")}
     )
-    private List<Artist> artists = new ArrayList<>();
+    private Set<Artist> artists = new HashSet<>();
 
     public Activity() {
     }
@@ -74,7 +69,7 @@ public class Activity implements Serializable {
         this.description = description;
         this.date = date;
     }
-    public Activity(int id, ActivityType activityType, String name, Place place, List<WebIdentity> users, List<Artist> artists, String description, Date date) {
+    public Activity(int id, ActivityType activityType, String name, Place place, Set<WebIdentity> users, Set<Artist> artists, String description, Date date) {
         this.id = id;
         this.activityType = activityType;
         this.name = name;
@@ -84,7 +79,7 @@ public class Activity implements Serializable {
         this.description = description;
         this.date = date;
     }
-    public Activity(ActivityType activityType, String name, Place place, List<WebIdentity> users, List<Artist> artists, String description, Date date) {
+    public Activity(ActivityType activityType, String name, Place place, Set<WebIdentity> users, Set<Artist> artists, String description, Date date) {
         this.activityType = activityType;
         this.name = name;
         this.place = place;
@@ -122,10 +117,10 @@ public class Activity implements Serializable {
     public void setPlace(Place place) {
         this.place = place;
     }
-    public void setUsers(List<WebIdentity> users) {
+    public void setUsers(Set<WebIdentity> users) {
         this.users = users;
     }
-    public void setArtists(List<Artist> artists) {
+    public void setArtists(Set<Artist> artists) {
         this.artists = artists;
     }
     public void setDescription(String description) {
@@ -148,10 +143,10 @@ public class Activity implements Serializable {
     public Place getPlace() {
         return place;
     }
-    public List<WebIdentity> getUsers() {
+    public Set<WebIdentity> getUsers() {
         return users;
     }
-    public List<Artist> getArtists() {
+    public Set<Artist> getArtists() {
         return artists;
     }
     public String getDescription() {

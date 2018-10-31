@@ -2,6 +2,7 @@ package by.iba.markovsky.festivalorganisation.controller;
 
 import by.iba.markovsky.festivalorganisation.exception.LimitException;
 import by.iba.markovsky.festivalorganisation.exception.ServiceException;
+import by.iba.markovsky.festivalorganisation.model.entity.Activity;
 import by.iba.markovsky.festivalorganisation.model.entity.ActivityType;
 import by.iba.markovsky.festivalorganisation.service.ActivityHibernateService;
 import by.iba.markovsky.festivalorganisation.service.ActivityService;
@@ -9,6 +10,7 @@ import by.iba.markovsky.festivalorganisation.util.database.HibernateUtil;
 import by.iba.markovsky.festivalorganisation.view.View;
 
 import java.util.Date;
+import java.util.List;
 
 public class Controller {
 
@@ -33,17 +35,17 @@ public class Controller {
             activityService.addAdctivityToDB();
             View.print(activityService.getAllActivities());*/
 
-            activityHibernateService.addPlace("Levkova", 10);
+/*            activityHibernateService.addPlace("Levkova", 10);
             activityHibernateService.addArtist("Lil Pump", "Rap");
             activityHibernateService.addParticipant("Kirill", "Kuzmich", 20,
                     "kirkuz", "Qwerty123", "kirkuz@gmail.com",
                     "345623", true);
             activityHibernateService.addActivityInfo(ActivityType.CONCERT, "Rap house", "This is concert.", new Date());
-            activityHibernateService.addAdctivityToDB();
+            activityHibernateService.addAdctivityToDB();*/
 
             View.print(activityHibernateService.getAllActivities());
             HibernateUtil.closeSessionFactory();
-        } catch (ServiceException | LimitException ee) {
+        } catch (ServiceException /*| LimitException*/ ee) {
             View.print(ee.getMessage());
             ee.printStackTrace();
         }

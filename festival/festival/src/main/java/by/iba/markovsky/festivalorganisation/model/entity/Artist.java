@@ -1,15 +1,10 @@
 package by.iba.markovsky.festivalorganisation.model.entity;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
-
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "Artist")
@@ -28,11 +23,11 @@ public class Artist implements Serializable {
     @Column(name = "genre")
     private String genre;
 
-    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER, mappedBy = "artists")
-    @Fetch(value = FetchMode.SUBSELECT)
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY, mappedBy = "artists")
+/*    @Fetch(value = FetchMode.SUBSELECT)*/
 /*    @LazyCollection(LazyCollectionOption.TRUE)*/
-    @Transient
-    private List<Activity> activities = new ArrayList<>();
+/*    @Transient*/
+    private Set<Activity> activities = new HashSet<>();
 
     public Artist() {
     }
@@ -44,7 +39,7 @@ public class Artist implements Serializable {
         this.name = name;
         this.genre = genre;
     }
-    public Artist(int id, String name, String genre, List<Activity> activities) {
+    public Artist(int id, String name, String genre, Set<Activity> activities) {
         this.id = id;
         this.name = name;
         this.genre = genre;
@@ -54,7 +49,7 @@ public class Artist implements Serializable {
         this.name = name;
         this.genre = genre;
     }
-    public Artist(String name, String genre, List<Activity> activities) {
+    public Artist(String name, String genre, Set<Activity> activities) {
         this.name = name;
         this.genre = genre;
         this.activities = activities;
@@ -69,7 +64,7 @@ public class Artist implements Serializable {
     public void setId(int id) {
         this.id = id;
     }
-    public void setActivities(List<Activity> activities) {
+    public void setActivities(Set<Activity> activities) {
         this.activities = activities;
     }
     public void setName(String name) {
@@ -83,7 +78,7 @@ public class Artist implements Serializable {
     public int getId() {
         return id;
     }
-    public List<Activity> getActivities() {
+    public Set<Activity> getActivities() {
         return activities;
     }
     public String getName() {
@@ -105,7 +100,7 @@ public class Artist implements Serializable {
     }
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, genre, activities);
+        return Objects.hash(id, name, genre);
     }
     @Override
     public String toString() {
@@ -113,7 +108,6 @@ public class Artist implements Serializable {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", genre='" + genre + '\'' +
-                ", activities=" + activities +
                 '}';
     }
 

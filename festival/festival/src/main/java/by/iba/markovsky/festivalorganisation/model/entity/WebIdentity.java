@@ -1,15 +1,10 @@
 package by.iba.markovsky.festivalorganisation.model.entity;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
-
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "WebIdentity")
@@ -41,11 +36,8 @@ public class WebIdentity implements Serializable {
     @JoinColumn(name = "identity_id", nullable = false)
     private Identity identity;
 
-    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER, mappedBy = "users")
-    @Fetch(value = FetchMode.SUBSELECT)
-/*    @LazyCollection(LazyCollectionOption.TRUE)*/
-    @Transient
-    private List<Activity> activities = new ArrayList<>();
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER, mappedBy = "users")
+    private Set<Activity> activities = new HashSet<>();
 
     public WebIdentity() {
     }
@@ -57,7 +49,7 @@ public class WebIdentity implements Serializable {
         this.telephone = telephone;
         this.status = status;
     }
-    public WebIdentity(int id, String username, String password, String email, String telephone, boolean status, Identity identity, List<Activity> activities) {
+    public WebIdentity(int id, String username, String password, String email, String telephone, boolean status, Identity identity, Set<Activity> activities) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -100,7 +92,7 @@ public class WebIdentity implements Serializable {
         this.status = status;
         this.identity = identity;
     }
-    public WebIdentity(String username, String password, String email, String telephone, boolean status, Identity identity, List<Activity> activities) {
+    public WebIdentity(String username, String password, String email, String telephone, boolean status, Identity identity, Set<Activity> activities) {
         this.username = username;
         this.password = password;
         this.email = email;
@@ -141,7 +133,7 @@ public class WebIdentity implements Serializable {
     public void setIdentity(Identity identity) {
         this.identity = identity;
     }
-    public void setActivities(List<Activity> activities) {
+    public void setActivities(Set<Activity> activities) {
         this.activities = activities;
     }
 
@@ -167,7 +159,7 @@ public class WebIdentity implements Serializable {
     public Identity getIdentity() {
         return identity;
     }
-    public List<Activity> getActivities() {
+    public Set<Activity> getActivities() {
         return activities;
     }
 
@@ -187,7 +179,7 @@ public class WebIdentity implements Serializable {
     }
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, password, email, telephone, status, identity, activities);
+        return Objects.hash(id, username, password, email, telephone, status, identity);
     }
     @Override
     public String toString() {
@@ -199,7 +191,6 @@ public class WebIdentity implements Serializable {
                 ", telephone='" + telephone + '\'' +
                 ", status=" + status +
                 ", identity=" + identity +
-                ", activities=" + activities +
                 '}';
     }
 

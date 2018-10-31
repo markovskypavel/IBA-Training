@@ -8,6 +8,7 @@ import by.iba.markovsky.festivalorganisation.repository.DAO;
 import by.iba.markovsky.festivalorganisation.repository.impl.connection.*;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -86,11 +87,11 @@ public class ActivityService {
                 for (WebIdentity webIdentity : webIdentities) {
                     webIdentity.setIdentity(identityDAO.getById(webIdentity.getIdentity().getId()));
                 }
-                activity.setUsers(webIdentities);
+                activity.setUsers(new HashSet<>(webIdentities));
                 //TODO: Здесь также возможно добавить цикл для добавления списка мероприятий к участнику
 
                 List<Artist> artists = artistDAO.getByQuery("SELECT a.artist_id,name,genre FROM Artist a INNER JOIN Activity_has_Artist aa ON a.artist_id=aa.artist_id");
-                activity.setArtists(artists);
+                activity.setArtists(new HashSet<>(artists));
                 //TODO: Здесь также возможно добавить цикл для добавления списка мероприятий к артисту
             }
             return activities;

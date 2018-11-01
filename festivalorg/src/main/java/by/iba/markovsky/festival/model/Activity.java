@@ -9,7 +9,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @XmlRootElement(name = "Activity")
-@XmlType(propOrder = {"name","description","date","place","users","artists"})
+@XmlType(propOrder = {"name","description","date","place","users","artists","activityType"})
 @XmlSeeAlso({Artist.class, Place.class, WebIdentity.class, ActivityType.class})
 @Entity
 @Table(name = "Activity")
@@ -140,7 +140,7 @@ public class Activity implements Serializable {
     public Date getDate() {
         return date;
     }
-    @XmlTransient
+    @XmlElement
     public ActivityType getActivityType() {
         return activityType;
     }

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<section th:fragment="error(imgPath, text)">
+    <div class="info">
+        <div class="info-row">
+            <figure>
+                <img th:src="${imgPath}" alt="error">
+                <figcaption th:utext="${text}"></figcaption>
+            </figure>
+        </div>
+    </div>
+</section>
+</html>

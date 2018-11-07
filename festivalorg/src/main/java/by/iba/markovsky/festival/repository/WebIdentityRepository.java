@@ -9,4 +9,5 @@ import java.util.List;
 @Repository("webIdentityRepository")
 public interface WebIdentityRepository extends CrudRepository<WebIdentity, Integer> {
     List<WebIdentity> findAll();
+    WebIdentity findByUsername(String username);
 }

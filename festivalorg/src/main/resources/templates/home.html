@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header (requireData = @{/js/main})"></head>
+<body>
+<div id="wrapper">
+    <div lang="ru" th:replace="fragments/navigation :: navigation"></div>
+
+    <div lang="ru" th:replace="fragments/slider :: slider"></div>
+
+    <section>
+        <blockquote>
+            <p>ПОСЛЕДНИЕ ФЕСТИВАЛИ</p>
+        </blockquote>
+        <div class="news" id="Stance" th:each="activity:${activities}">
+            <a th:href="@{'/festivals/festival/' + ${activity.id}}">Фестиваль</a>
+            <span th:utext="${activity.id}"></span>
+<!--            <h2><u>STANCE</u>: ЕЗДИМ НИЗКО</h2>
+            <p>Stance - это вся культура низких машин.</p>
+            <p>Stance (в переводе с англ. "посадка") — все чаще применяется к автомобилям относительно клиренса (дорожного просвета) и заменяет слово Drop (в переводе с англ. "падение"), которым обозначается заниженный и уроненный на самое брюхо автомобиль (дропнутый).</p>
+            <p>К ней относятся VW, ВАЗ, Opel, BMW и все остальные марки и модели автомобилей, выдержанные в общих традициях- правильные диски и посадка, а также наличие изюминки, позволяющей автомобилю отличаться от себе подобных (например, редкие OEM-фары от Golf MK2 Rallye на Jetta MK2 и т.д.). Так что неважно, Daewoo Lanos это или же Audi A6. Главное то, чтобы машины были стильными!</p>
+            <div class="news-pictures">
+                <figure>
+                    <img src="${pageContext.request.contextPath}/resource/news11.jpg" title="DC Team" alt="news11">
+                </figure>
+                <figure>
+                    <img src="${pageContext.request.contextPath}/resource/news12.jpg" title="Map of tour" alt="news12">
+                </figure>
+            </div>-->
+        </div>
+    </section>
+
+    <div lang="ru" th:replace="fragments/footer :: footer"></div>
+</div>
+</body>
+</html>

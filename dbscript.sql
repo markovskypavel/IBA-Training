@@ -75,10 +75,10 @@ CREATE TABLE IF NOT EXISTS `FestivalOrganisation`.`WebIdentity` (
   `webIdentity_id` INT NOT NULL AUTO_INCREMENT,
   `identity_id` INT NOT NULL,
   `username` VARCHAR(45) NOT NULL,
-  `password` VARCHAR(45) NOT NULL,
+  `password` LONGTEXT NOT NULL,
   `email` VARCHAR(45) NOT NULL,
   `telephone` VARCHAR(45) NULL,
-  `status` TINYINT NOT NULL,
+  `role` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`webIdentity_id`, `identity_id`),
   INDEX `fk_WebIdentity_Identity1_idx` (`identity_id` ASC),
   CONSTRAINT `fk_WebIdentity_Identity1`

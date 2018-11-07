@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Fileworker with serialization
  * */
-@Service("FileWorkerImpl")
+@Service("fileWorkerImpl")
 public class FileWorkerImpl<T> implements FileWorker<T> {
 
     @Override

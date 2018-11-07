@@ -1,0 +1,588 @@
+@import url('https://fonts.googleapis.com/css?family=Cuprum|Oswald');
+:root {
+    --main-bg-color: #fbfbfb;
+    --first-main-color: #e8ceb5;
+    --second-main-color: #d4a06e;
+    --contract-color: #b06e40;
+    --main-font: 'Oswald';
+    --contrast-font: 'Cuprum';
+}
+
+/* HOME CONTRAINER */
+body {
+    background-color: var(--main-bg-color);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    margin: 0;
+}
+/* Обёртка */
+#wrapper {
+    min-width: 780px; /* Задать ширину (убрать для флекса) */
+    margin: auto;
+    box-sizing: border-box;
+}
+
+/* =====ВЕРХНИЙ NAVBAR===== */
+nav ul {
+    margin: 0;
+    padding: 0;
+    border-bottom: solid var(--second-main-color);
+    border-width: 2px;
+}
+/* Для всех ссылок в nav */
+nav a {
+    font: 25px var(--main-font), sans-serif;
+    color: var(--second-main-color);
+}
+/* Для верхнего меню */
+.top-menu {
+    /* Для фиксации */
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    width: 100%;
+    min-width: 780px;
+
+    background-color: var(--first-main-color);
+    display: flex;
+}
+.top-menu li {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    flex-basis: auto; /* Определяет основу флекса, которая является начальным размером элемента */
+    flex-grow: 1; /* определяет, какую часть свободного пространства может занять контейнер, в соотношении с другими контейнерами */
+    height: 70px;
+}
+/* Для заполнения ссылкой ячейки списка */
+.top-menu li > a {
+    line-height: 70px; /* Высота слов в ссылке */
+    height: 100%;
+    display: block;
+    text-decoration: none; /* Убрать подчёркивание при hover */
+    box-shadow: none;
+}
+
+/* =====SECTION===== */
+section {
+    padding-bottom: 50px;
+}
+blockquote {
+    margin: 0;
+    background: var(--first-main-color);
+    padding: 10px 20px;
+    border-top: solid var(--second-main-color);
+    border-bottom: solid var(--second-main-color);
+    border-width: 2px;
+}
+blockquote p {
+    color: var(--second-main-color);
+    font: 21px var(--main-font), sans-serif;
+    margin: 0;
+    text-align: right;
+}
+blockquote cite {
+    display: block;
+    font-size: 15px;
+    font-style: italic;
+    color: var(--second-main-color);
+    margin: 0;
+    text-align: right;
+}
+/* Последние новости */
+section > h2 {
+    background: var(--first-main-color);
+    font: 21px var(--main-font), sans-serif;
+    color: var(--second-main-color);
+    padding: 0 20px 0 0;
+    margin: 23px 0 0 0;
+    text-align: right;
+    border-top: solid var(--second-main-color);
+    border-bottom: solid var(--second-main-color);
+    border-width: 2px;
+}
+.info {
+    padding-bottom: 200px;
+    padding-top: 20px;
+}
+.info-row {
+    text-align: center;
+}
+/* Пространство над картинкой */
+.info-row figure {
+    margin: 50px 50px 0px 50px;
+}
+figure img {
+    /* Размеры картинок */
+    width: 500px;
+    height: 300px;
+}
+/* Описание преимуществ */
+figure figcaption {
+    margin-top: 5px;
+    text-align: center;
+    font: 21px var(--contrast-font), sans-serif;
+    color: var(--second-main-color);
+}
+/* Текст */
+p {
+    margin: 20px 20px 0 0;
+    font: 17px var(--contrast-font), sans-serif;
+    color: var(--second-main-color);
+    text-align: justify;
+}
+/* Сводка, которая остается на месте при прокрутке */
+.news-aside {
+    position: fixed;
+    width: 240px;
+}
+
+/* Дата новостей */
+.news > h2 {
+    background: #F7CD44;
+    font: 20px 'Pattaya', sans-serif;
+    color: rgba(36, 36, 36, 1);
+    padding: 0 10px 0 20px;
+    margin: 15.2px 0 0 0;
+    text-align: left;
+}
+
+/* Текст */
+.news p {
+    margin: 20px 20px 0 0;
+    font: 17px var(--contrast-font), sans-serif;
+    color: white;
+    text-align: justify;
+}
+
+/* Картинки в новостях */
+.news figure > img {
+    display: block;
+    outline: 1px solid #F7CD44;
+    margin-top: 20px;
+    cursor: pointer;
+    /* Размеры картинок */
+    width: 192px;
+    height: 108px;
+}
+
+/* При наведении увеличивается граница картинки новостей */
+.news figure > img:hover {
+    animation: borderPictures;
+    animation-delay: 0s;
+    animation-duration: 0.3s;
+    /* 	Картинка останется после анимации */
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 1;
+}
+
+/* Расстояние между картинками */
+.news figure + figure {
+    margin-left: 20px;
+}
+
+/* Блок для центрирования картинок */
+.news-pictures {
+    text-align: center;
+}
+
+/* Если экран меньше 760px, то картинки смещаются */
+@media (max-width: 760px) {
+    .news-pictures {
+        text-align: left;
+    }
+
+    .news figure + figure {
+        margin-left: 0;
+    }
+}
+
+.news {
+    margin-top: 100px;
+}
+
+/* =====SLIDER===== */
+#viewport {
+    /* Для размещения на фул ширину страницы */
+    margin-top: 70px;
+    height: 44vw;
+    min-height: 300px;
+    width: 100%;
+    min-width: 780px;
+
+    position: relative;
+    overflow: hidden;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    text-align: center;
+}
+#slidewrapper {
+    position: relative;
+    width: calc(100% * 4);
+    -webkit-transition: 1s;
+    -o-transition: 1s;
+    transition: 1s;
+    -webkit-transition-timing-function: cubic-bezier(.67, .01, .23, 1);
+    -o-transition-timing-function: cubic-bezier(.67, .01, .23, 1);
+    transition-timing-function: cubic-bezier(.67, .01, .23, 1);
+}
+#slidewrapper, #slidewrapper ul, #slidewrapper li {
+    margin: 0;
+    padding: 0;
+}
+.slide {
+    width: calc(100% / 4);
+    list-style: none;
+    display: inline;
+    float: left;
+}
+.slide-img {
+    width: 100%;
+}
+#nav-btns {
+    position: absolute;
+    width: 100%;
+    bottom: 20px;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+.slide-nav-btn {
+    position: relative;
+    display: inline-block;
+    list-style: none;
+    width: 20px;
+    height: 20px;
+    background-color: var(--contract-color);
+    border-radius: 50%;
+    margin: 3px;
+}
+.slide-nav-btn:hover {
+    cursor: pointer;
+    animation: up;
+    animation-delay: 0s;
+    animation-duration: 500ms;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+}
+@keyframes up {
+    100% {
+        transform: scale(1.3, 1.3);
+    }
+}
+
+/* =====FOOTER===== */
+footer {
+    display: inline-block; /* <==>clear:both; */
+    width: 100%;
+    margin: auto;
+    padding: 50px 0 0 0;
+}
+/* Sitemap/social networks */
+footer h3 {
+    font: 12px var(--contrast-font), sans-serif;
+    color: var(--second-main-color);
+    border-bottom: 1px solid var(--second-main-color);
+    margin: 0 0 10px 0;
+}
+#social {
+    width: 210px;
+    height: 90px;
+    float: left;
+    margin: 0 5px 0 20px;
+}
+#sitemap {
+    width: 230px;
+    height: 90px;
+    float: left;
+    margin: 0 20px 0 20px;
+}
+#sitemap div {
+    display: inline-block; /* Для расположения ссылок в строчку */
+}
+/* Расстояние между ссылками в блоке sitemap */
+#sitemap div + div {
+    margin-left: 12px;
+}
+#sitemap a {
+    font: 16px var(--contrast-font), sans-serif;
+    color: var(--second-main-color);
+    display: block;
+    text-decoration: none;
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+#sitemap a:hover {
+    text-decoration: underline;
+}
+#social a:hover {
+    animation: spinningLink;
+    animation-delay: 0s;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+}
+@keyframes spinningLink {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+.social-icon {
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    margin-right: 15px;
+}
+.twitter {
+    background: url(../img/twitter.png) no-repeat;
+    background-size: cover;
+}
+.vk {
+    background: url(../img/vk.png) no-repeat;
+    background-size: cover;
+}
+.youtube {
+    background: url(../img/youtube.png) no-repeat;
+    background-size: cover;
+}
+.instagram {
+    background: url(../img/instagram.png) no-repeat;
+    background-size: cover;
+}
+/* Логотип внизу */
+#footer-logo {
+    margin: 40px 20px 0 0;
+    float: right;
+    text-align: right;
+}
+.footer-logo {
+    width: 120px;
+    height: 30px;
+}
+/* Markovsky Pavel */
+footer p {
+    line-height: 12px; /* Для уменьшения толщины линии текста */
+    font-size: 10px;
+    margin: 0 2px 0 0;
+    text-align: right;
+    color: var(--second-main-color);
+}
+
+/* =====ABOUT===== */
+aside {
+    float: left;
+    width: 250px;
+}
+/* FOUNDER */
+aside.founder {
+    margin-top: 0;
+    margin-left: 20px;
+    margin-right: 20px;
+    width: 240px;
+}
+.founder > h2 {
+    background: var(--second-main-color);
+    font: 20px var(--main-font), sans-serif;
+    color: var(--first-main-color);
+    padding: 10px;
+    margin: 0;
+    text-align: center;
+}
+figure {
+    display: inline-block; /* Размещение в ряд */
+    /* Для outline, тк он не занимает места, в отличие от border */
+    margin: 0 0 0 1px;
+}
+.founder figure > img {
+    display: block;
+    outline: 1px solid var(--second-main-color);
+    /* Размеры картинок */
+    width: 238px;
+    height: 238px;
+}
+/* Имя создателя под картинкой */
+.founder figure figcaption {
+    font: 21px var(--contrast-font), sans-serif;
+    color: var(--second-main-color);
+    margin-top: 5px;
+    text-align: center;
+}
+/* Подпись 'основатель компании' */
+.founder figure figcaption > span {
+    display: block;
+    font: 21px var(--contrast-font), sans-serif;
+    font-size: 14px;
+    color: var(--second-main-color);
+    text-align: center;
+    font-style: italic; /*  Подпись под именами */
+    line-height: 10px;
+}
+/* Ссылки */
+a {
+    font: 16px var(--contrast-font), sans-serif;
+    color: var(--second-main-color);
+    text-decoration: none;
+}
+a:hover {
+    color: var(--first-main-color);
+}
+.about {
+    margin-top: 100px;
+    margin-bottom: 350px;
+}
+/* Текст про сервис */
+.about p {
+    margin: 16px 20px 0 0;
+    font: 17px var(--contrast-font), sans-serif;
+    color: var(--second-main-color);
+    text-align: justify;
+}
+
+/* =====LOGIN/REGISTRATION===== */
+.auth, .reg {
+    background-color: var(--first-main-color);
+    border: 2px solid var(--second-main-color);
+    width: 40%;
+    text-align: center;
+    padding-bottom: 70px;
+    margin: 150px auto 250px;
+}
+/* Личный кабинет */
+.auth h2, .reg h2 {
+    background: var(--second-main-color);
+    font: 21px var(--main-font), sans-serif;
+    color: var(--first-main-color);
+    padding: 10px;
+    margin-top: 0px;
+    border-bottom: 2px solid var(--second-main-color);
+}
+/* Поля заполнения логина/регистрация*/
+.auth INPUT[type ="text"], .reg INPUT[type ="text"], .reg INPUT[type ="email"],
+.auth INPUT[type ="password"], .reg INPUT[type ="password"], .reg INPUT[type ="number"] {
+    width: 200px;
+    height: 30px;
+    padding: 3px;
+    margin-top: 10px;
+    box-sizing: border-box;
+    background: var(--main-bg-color);
+    /*border: none;*/
+    outline: none;
+    font: 15px var(--contrast-font), sans-serif;
+    border: 2px solid var(--contract-color);
+    color: var(--contract-color);
+}
+.auth INPUT[type ="text"]:focus, .reg INPUT[type ="text"]:focus, .reg INPUT[type ="email"]:focus,
+.auth INPUT[type ="password"]:focus, .reg INPUT[type ="password"]:focus, .reg INPUT[type ="number"]:focus {
+    border: 2px solid var(--contract-color);
+    color: var(--contract-color);
+}
+.auth INPUT[type ="text"]:focus::placeholder, .reg INPUT[type ="text"]:focus::placeholder, .reg INPUT[type ="email"]:focus::placeholder,
+.auth INPUT[type ="password"]:focus::placeholder, .reg INPUT[type ="password"]:focus::placeholder, .reg INPUT[type ="number"]:focus::placeholder {
+    opacity: 0;
+}
+/* Кнопка подтверждения для авторизации/регистрации */
+.auth INPUT[type ="submit"], .reg INPUT[type ="submit"], .auth INPUT[type ="button"] {
+    width: 200px;
+    height: 30px;
+    padding: 3px;
+    margin: 10px 0 0 0;
+    box-sizing: border-box;
+    background: var(--second-main-color);
+    border: none;
+    outline: none;
+    font: 15px var(--contrast-font), sans-serif;
+    color: var(--first-main-color);
+}
+.auth INPUT[type ="submit"]:hover, .reg INPUT[type ="submit"]:hover, .auth INPUT[type ="button"]:hover {
+    background: var(--contract-color);
+    color: var(--first-main-color);
+    cursor: pointer;
+}
+.auth INPUT[type ="submit"]:active, .reg INPUT[type ="submit"]:active, .auth INPUT[type ="button"]:active {
+    background: var(--main-bg-color);
+    color: var(--contract-color);
+    cursor: pointer;
+}
+.auth a {
+    font: 14px var(--contrast-font), sans-serif;
+    color: var(--contract-color);
+    text-decoration: none;
+}
+.auth a:hover {
+    text-decoration: underline;
+}
+/*Строка с ошибками*/
+.error {
+    font-size: 14px;
+    font-style: italic;
+    color: red;
+    width: 250px;
+    display: inline-block;
+}
+
+/* =====МОДАЛЬНОЕ ОКНО===== */
+/* Тёмный фон */
+.overlay {
+    background: #000;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 1000;
+    opacity: .5;
+}
+
+/* Картинка на тёмном фоне */
+.visible {
+    background-size: cover;
+    position: fixed;
+    left: 50%;
+    right: 50%;
+    top: 10%;
+    margin-left: -480px;
+    overflow: hidden;
+    z-index: 2000;
+    width: 960px;
+    height: 540px;
+    padding: 0px;
+    cursor: pointer;
+    outline: 5px solid #F7CD44;
+}
+
+/* Затемнение */
+.visible:hover {
+    animation: opacityPictures;
+    animation-delay: 0s;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+}
+
+@keyframes opacityPictures {
+    100% {
+        opacity: .8;
+    }
+}
+
+/* Если ширина экрана меньше 760px, то картинки сдвигаются */
+@media (max-width: 760px) {
+    .visible {
+        top: 15%;
+        margin-left: -320px;
+        width: 640px;
+        height: 360px;
+    }
+}
+
+/* Блок со всплывающим окном */
+#win {
+    opacity: 0;
+}

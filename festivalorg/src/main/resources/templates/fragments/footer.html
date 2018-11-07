@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<footer th:fragment="footer">
+    <div id="sitemap">
+        <h3>НАВИГАЦИЯ САЙТА</h3>
+        <div>
+            <a th:href="@{/}">ГЛАВНАЯ</a>
+            <a th:href="@{/about}">О НАС</a>
+        </div>
+        <div>
+            <a href="https://twitter.com/markovskypavel">ПОДДЕРЖКА</a>
+        </div>
+        <div>
+            <a th:href="@{/login}" sec:authorize="!isAuthenticated()">ВХОД</a>
+            <a th:href="@{/admin}" sec:authorize="hasRole('ADMIN')">КАБИНЕТ</a>
+            <a th:href="@{/user}" sec:authorize="hasRole('USER')">КАБИНЕТ</a>
+        </div>
+    </div>
+    <div id="social">
+        <h3>СОЦИАЛЬНЫЕ СЕТИ</h3>
+        <a href="https://twitter.com/markovskypavel" class="social-icon twitter"></a>
+        <a href="https://vk.com/markovskypavel" class="social-icon vk"></a>
+        <a href="https://www.youtube.com/channel/UC04fb6s2HDbm1_P_OIdhbPg" class="social-icon youtube"></a>
+        <a href="https://www.instagram.com/markovskypavel/" class="social-icon instagram"></a>
+    </div>
+    <div id="footer-logo">
+        <a th:href="@{/}"><img th:src="@{/img/logo.png}" alt="SiteLogo"
+                                   class="footer-logo"></a>
+        <p>Copyright © 2018 Markovsky Pavel, All rights reserved.</p>
+    </div>
+</footer>
+</html>

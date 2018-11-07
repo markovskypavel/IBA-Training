@@ -1,6 +1,11 @@
 package by.iba.markovsky.festival.model;
 
+import by.iba.markovsky.festival.constant.RegExConstant;
+import by.iba.markovsky.festival.model.enumeration.ActivityType;
+
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.Pattern;
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -26,6 +31,7 @@ public class Activity implements Serializable {
     @Column(name = "activityType", nullable = false)
     private ActivityType activityType = ActivityType.FESTIVAL;
 
+    @Pattern(regexp = RegExConstant.UNIQUE_NAME)
     @Column(name = "name", nullable = false)
     private String name;
 
@@ -35,9 +41,10 @@ public class Activity implements Serializable {
     @Column(name = "date")
     private Date date;
 
+    @Valid
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
     @JoinColumn(name = "place_id", nullable = false)
-    private Place place;
+    private Place place = new Place();
 
     @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER )
     @JoinTable(

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="header(requireData)">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1">
+    <title>Фестивали</title>
+    <link id="contextPathHolder" th:attr="data-contextPath=@{/}"/>
+    <link rel="shortcut icon" th:href="@{/img/siteicon.ico}" type="image/x-icon">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <script th:attr="data-main=${requireData}"
+            th:src="@{/js/libs/require.js}"></script>
+</head>
+</html>

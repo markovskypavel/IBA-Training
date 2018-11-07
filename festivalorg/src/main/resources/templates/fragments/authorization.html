@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ru"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<div class="auth" th:fragment="authorization">
+    <h2>Авторизация</h2>
+    <form name='authForm' th:action="@{/j_spring_security_check}" method='POST'>
+        <input type="text" name="username" placeholder="логин" required></br>
+        <input type="password" name="password" placeholder="пароль" required></br>
+        <span class="error" th:if="${#request.getParameter('error') == 'true'}">Неправильный логин или пароль</span></br>
+        <input type="submit" name="submit" value="Войти"></br>
+        <a th:href="@{/registration}">Создать учётную запись?</a>
+        <!--            <span th:if="${#request.getParameter('error') == 'true'} and
+                     ${#session!= null and #session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION') != null}"
+                          th:utext="${#session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION')}">Static summary</span>-->
+    </form>
+</div>
+</html>

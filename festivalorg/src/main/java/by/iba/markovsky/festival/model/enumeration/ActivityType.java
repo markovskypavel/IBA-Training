@@ -1,4 +1,4 @@
-package by.iba.markovsky.festival.model;
+package by.iba.markovsky.festival.model.enumeration;
 
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlEnumValue;

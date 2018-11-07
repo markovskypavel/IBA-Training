@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header (requireData = @{/js/about})"></head>
+<body>
+<div id="wrapper">
+    <div lang="ru" th:replace="fragments/navigation :: navigation"></div>
+    <section lang="ru" th:replace="fragments/error :: error(imgPath = @{/img/403.png}, text = 'Упс! Доступ запрещен!')"></section>
+    <div lang="ru" th:replace="fragments/footer :: footer"></div>
+</div>
+</body>
+</html>

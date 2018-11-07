@@ -1,6 +1,11 @@
 package by.iba.markovsky.festival.model;
 
+import by.iba.markovsky.festival.constant.RegExConstant;
+
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Pattern;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -21,12 +26,16 @@ public class Identity implements Serializable {
     @Column(name = "identity_id", unique = true, updatable = false)
     private int id;
 
+    @Pattern(regexp = RegExConstant.NAME)
     @Column(name = "name")
     private String name;
 
+    @Pattern(regexp = RegExConstant.SURNAME)
     @Column(name = "surname", nullable = false)
     private String surname;
 
+    @Min(5)
+    @Max(95)
     @Column(name = "age")
     private int age;
 

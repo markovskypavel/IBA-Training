@@ -1,6 +1,9 @@
 package by.iba.markovsky.festival.model;
 
+import by.iba.markovsky.festival.constant.RegExConstant;
+
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -20,9 +23,11 @@ public class Artist implements Serializable {
     @Column(name = "artist_id", unique = true, updatable = false)
     private int id;
 
+    @Pattern(regexp = RegExConstant.UNIQUE_NAME)
     @Column(name = "name")
     private String name;
 
+    @Pattern(regexp = RegExConstant.GENRE)
     @Column(name = "genre")
     private String genre;
 

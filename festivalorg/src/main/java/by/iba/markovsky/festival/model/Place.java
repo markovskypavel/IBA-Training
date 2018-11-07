@@ -1,6 +1,11 @@
 package by.iba.markovsky.festival.model;
 
+import by.iba.markovsky.festival.constant.RegExConstant;
+
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Pattern;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -21,9 +26,12 @@ public class Place implements Serializable {
     @Column(name = "place_id", unique = true, updatable = false)
     private int id;
 
+    @Pattern(regexp = RegExConstant.ADDRESS)
     @Column(name = "address", nullable = false)
     private String address;
 
+    @Min(5)
+    @Max(10000)
     @Column(name = "capacity", nullable = false)
     private int capacity;
 

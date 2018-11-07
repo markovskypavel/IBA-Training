@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="ru"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<nav th:fragment="navigation">
+    <ul class="top-menu">
+        <li><a th:href="@{/}">ГЛАВНАЯ</a></li>
+        <li><a th:href="@{/about}">О НАС</a></li>
+        <li sec:authorize="!isAuthenticated()"><a th:href="@{/login}">ВХОД</a></li>
+        <li sec:authorize="hasRole('ADMIN')"><a th:href="@{/admin}" th:utext="'Hi, ' + ${#request.userPrincipal.name} + '!'">АДМИНИСТРАТОР</a></li>
+        <li sec:authorize="hasRole('USER')"><a th:href="@{/user}" th:utext="'Hi, ' + ${#request.userPrincipal.name} + '!'">КАБИНЕТ</a></li>
+    </ul>
+</nav>
+</html>

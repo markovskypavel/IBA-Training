@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ru"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<div id="viewport" th:fragment="slider">
+    <ul id="slidewrapper">
+        <li class="slide">
+            <img th:src="@{/img/slidepic1.jpg}" alt="slide 1" class="slide-img">
+        </li>
+        <li class="slide">
+            <img th:src="@{/img/slidepic2.jpg}" alt="slide 2" class="slide-img">
+        </li>
+        <li class="slide">
+            <img th:src="@{/img/slidepic3.jpg}" alt="slide 3" class="slide-img">
+        </li>
+        <li class="slide">
+            <img th:src="@{/img/slidepic4.jpg}" alt="slide 4" class="slide-img">
+        </li>
+    </ul>
+    <ul id="nav-btns">
+        <li class="slide-nav-btn"></li>
+        <li class="slide-nav-btn"></li>
+        <li class="slide-nav-btn"></li>
+        <li class="slide-nav-btn"></li>
+    </ul>
+</div>
+</html>

@@ -2,6 +2,11 @@ package by.iba.markovsky.festival.model;
 
 import by.iba.markovsky.festival.constant.RegExConstant;
 import by.iba.markovsky.festival.model.enumeration.RoleType;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
 import javax.validation.Valid;
@@ -14,8 +19,10 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+@ApiModel(description="WebIdentity")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @XmlRootElement(name = "WebIdentity")
-@XmlType(propOrder = {"username","password","email","telephone","roleType","identity"})
+@XmlType(propOrder = {"id","username","unencryptedPassword","password","email","telephone","roleType","identity"})
 @XmlSeeAlso({Identity.class, RoleType.class})
 @Entity
 @Table(name = "WebIdentity")
@@ -23,8 +30,7 @@ public class WebIdentity implements Serializable {
 
     private static final long serialVersionUID = 3276480509050536113L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "webIdentity_id", unique = true, updatable = false)
     private int id;
 
@@ -32,8 +38,9 @@ public class WebIdentity implements Serializable {
     @Column(name = "username", nullable = false)
     private String username;
 
-    //TODO: Узнать почему после кодировки не работает
-    /*@Pattern(regexp = RegExConstant.PASSWORD)*/
+    @Pattern(regexp = RegExConstant.PASSWORD)
+    private String unencryptedPassword;
+
     @Size(min = 5)
     @Column(name = "password", nullable = false)
     private String password;
@@ -55,70 +62,90 @@ public class WebIdentity implements Serializable {
     @JoinColumn(name = "identity_id", nullable = false)
     private Identity identity = new Identity();
 
-    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER, mappedBy = "users")
+    //TODO: Лучше убрать many to many + У каждого поля права на доступ с angular или Для клиента свои, для сервера свои сущности
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.EAGER, mappedBy = "users")
     private Set<Activity> activities = new HashSet<>();
 
     public WebIdentity() {
     }
-    public WebIdentity(int id, String username, String password, String email, String telephone, RoleType roleType) {
+    public WebIdentity(int id, String username, String unencryptedPassword, String email, String telephone, RoleType roleType) {
         this.id = id;
         this.username = username;
-        this.password = password;
+        this.unencryptedPassword = unencryptedPassword;
         this.email = email;
         this.telephone = telephone;
         this.roleType = roleType;
     }
-    public WebIdentity(int id, String username, String password, String email, String telephone, RoleType roleType, Identity identity, Set<Activity> activities) {
+    public WebIdentity(int id, String username, String unencryptedPassword, String email, String telephone, RoleType roleType, Identity identity, Set<Activity> activities) {
         this.id = id;
         this.username = username;
-        this.password = password;
+        this.unencryptedPassword = unencryptedPassword;
         this.email = email;
         this.telephone = telephone;
         this.roleType = roleType;
         this.identity = identity;
         this.activities = activities;
     }
-    public WebIdentity(int id, String username, String password, String email, String telephone, RoleType roleType, Identity identity) {
+    public WebIdentity(int id, String username, String unencryptedPassword, String email, String telephone, RoleType roleType, Identity identity) {
         this.id = id;
         this.username = username;
-        this.password = password;
+        this.unencryptedPassword = unencryptedPassword;
         this.email = email;
         this.telephone = telephone;
         this.roleType = roleType;
         this.identity = identity;
     }
-    public WebIdentity(int id, int idIdentity, String username, String password, String email, String telephone, RoleType roleType) {
+    public WebIdentity(int id, int idIdentity, String username, String unencryptedPassword, String email, String telephone, RoleType roleType) {
         this.id = id;
         this.username = username;
-        this.password = password;
+        this.unencryptedPassword = unencryptedPassword;
         this.email = email;
         this.telephone = telephone;
         this.roleType = roleType;
         this.identity = new Identity(idIdentity);
     }
-    public WebIdentity(String username, String password, String email, String telephone, RoleType roleType) {
+    public WebIdentity(String username, String unencryptedPassword, String email, String telephone, RoleType roleType) {
         this.username = username;
-        this.password = password;
+        this.unencryptedPassword = unencryptedPassword;
         this.email = email;
         this.telephone = telephone;
         this.roleType = roleType;
     }
-    public WebIdentity(String username, String password, String email, String telephone, RoleType roleType, Identity identity) {
+    public WebIdentity(String username, String unencryptedPassword, String email, String telephone, RoleType roleType, Identity identity) {
         this.username = username;
-        this.password = password;
+        this.unencryptedPassword = unencryptedPassword;
         this.email = email;
         this.telephone = telephone;
         this.roleType = roleType;
         this.identity = identity;
     }
-    public WebIdentity(String username, String password, String email, String telephone, RoleType roleType, Identity identity, Set<Activity> activities) {
+    public WebIdentity(String username, String unencryptedPassword, String email, String telephone, RoleType roleType, Identity identity, Set<Activity> activities) {
         this.username = username;
+        this.unencryptedPassword = unencryptedPassword;
+        this.email = email;
+        this.telephone = telephone;
+        this.roleType = roleType;
+        this.identity = identity;
+        this.activities = activities;
+    }
+    public WebIdentity(String username, String unencryptedPassword, String password, String email, String telephone, RoleType roleType, Identity identity, Set<Activity> activities) {
+        this.username = username;
+        this.unencryptedPassword = unencryptedPassword;
         this.password = password;
         this.email = email;
         this.telephone = telephone;
         this.roleType = roleType;
         this.identity = identity;
         this.activities = activities;
+    }
+    public WebIdentity(String username, String unencryptedPassword, String password, String email, String telephone, RoleType roleType, Identity identity) {
+        this.username = username;
+        this.unencryptedPassword = unencryptedPassword;
+        this.password = password;
+        this.email = email;
+        this.telephone = telephone;
+        this.roleType = roleType;
+        this.identity = identity;
     }
     public WebIdentity(WebIdentity webIdentity) {
         this.username = webIdentity.username;
@@ -140,6 +167,9 @@ public class WebIdentity implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
+    public void setUnencryptedPassword(String unencryptedPassword) {
+        this.unencryptedPassword = unencryptedPassword;
+    }
     public void setEmail(String email) {
         this.email = email;
     }
@@ -157,7 +187,7 @@ public class WebIdentity implements Serializable {
     }
 
     //Getters
-    @XmlTransient
+    @XmlElement
     public int getId() {
         return id;
     }
@@ -168,6 +198,10 @@ public class WebIdentity implements Serializable {
     @XmlElement
     public String getPassword() {
         return password;
+    }
+    @XmlElement
+    public String getUnencryptedPassword() {
+        return unencryptedPassword;
     }
     @XmlElement
     public String getEmail() {
@@ -185,6 +219,7 @@ public class WebIdentity implements Serializable {
     public Identity getIdentity() {
         return identity;
     }
+    /*@JsonIgnore*/
     @XmlTransient
     public Set<Activity> getActivities() {
         return activities;
@@ -196,27 +231,29 @@ public class WebIdentity implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         WebIdentity that = (WebIdentity) o;
         return id == that.id &&
-                roleType == that.roleType &&
                 Objects.equals(username, that.username) &&
+                Objects.equals(unencryptedPassword, that.unencryptedPassword) &&
                 Objects.equals(password, that.password) &&
                 Objects.equals(email, that.email) &&
                 Objects.equals(telephone, that.telephone) &&
+                roleType == that.roleType &&
                 Objects.equals(identity, that.identity) &&
                 Objects.equals(activities, that.activities);
     }
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, password, email, telephone, roleType, identity);
+        return Objects.hash(id, username, unencryptedPassword, password, email, telephone, roleType, identity);
     }
     @Override
     public String toString() {
         return "WebIdentity{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
+                ", unencryptedPassword='" + unencryptedPassword + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", telephone='" + telephone + '\'' +
-                ", status=" + roleType +
+                ", roleType=" + roleType +
                 ", identity=" + identity +
                 '}';
     }

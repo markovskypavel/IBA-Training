@@ -34,7 +34,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         //TODO: Правильно ностроить маппинг
         // The pages does not require login
-        http.authorizeRequests().antMatchers(HOME, ABOUT_US, LOGIN, DENIED, NOT_FOUND, REGISTRATION).permitAll();
+        http.authorizeRequests().antMatchers(HOME, ABOUT_US, LOGIN, DENIED, NOT_FOUND, REGISTRATION, ERROR, GET_ACTIVITY, GET_ARTIST).permitAll();
         //For authenticated users
         http.authorizeRequests().antMatchers(SUBSCRIBE, UNSUBSCRIBE, LOGOUT).access("isAuthenticated()");
 
@@ -43,7 +43,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers(USER).access("hasAnyRole('USER', 'ADMIN')");
 
         // For ADMIN only.
-        http.authorizeRequests().antMatchers(ADMIN, ADD_FESTIVAL, ADD).access("hasRole('ADMIN')");
+        http.authorizeRequests().antMatchers(ADMIN, ADD_ACTIVITY, EDIT_ACTIVITY, DELETE_ACTIVITY,
+                ADD_ARTIST, EDIT_ARTIST, DELETE_ARTIST, ADD_ACTIVITY_ARTIST, REMOVE_ACTIVITY_ARTIST).access("hasRole('ADMIN')");
 
         // When the user has logged in as XX.
         // But access a page that requires role YY,

@@ -9,7 +9,7 @@
         <input type="password" name="password" placeholder="пароль" required></br>
         <span class="error" th:if="${#request.getParameter('error') == 'true'}">Неправильный логин или пароль</span></br>
         <input type="submit" name="submit" value="Войти"></br>
-        <a th:href="@{/registration}">Создать учётную запись?</a>
+        <a th:href="@{/users/registration}">Создать учётную запись?</a>
         <!--            <span th:if="${#request.getParameter('error') == 'true'} and
                      ${#session!= null and #session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION') != null}"
                           th:utext="${#session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION')}">Static summary</span>-->

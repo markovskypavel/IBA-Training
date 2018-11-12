@@ -5,10 +5,11 @@ require.config({
         "bootstrap": "libs/bootstrap",
         "slider": "modules/slider",
         "navbar": "modules/navbar",
-        "articles": "modules/articles"
+        "articles": "modules/articles",
+        "data": "modules/data"
     }
 });
 
-require(['navbar', 'slider', 'articles'], function () {
+require(['navbar', 'slider', 'articles', 'data'], function () {
 
 });

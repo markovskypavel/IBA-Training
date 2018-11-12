@@ -11,9 +11,14 @@
         <blockquote>
             <p>ПОСЛЕДНИЕ ФЕСТИВАЛИ</p>
         </blockquote>
+        <a th:href="@{/festivals/add}">Добавить фестиваль</a>
+        <a th:href="@{/artists/add}">Добавить артиста</a>
         <div class="news" id="Stance" th:each="activity:${activities}">
-            <a th:href="@{'/festivals/festival/' + ${activity.id}}">Фестиваль</a>
-            <span th:utext="${activity.id}"></span>
+            <input type="button" name="festival" th:value="'Фестиваль №' + ${activity.id}" th:attr="data-url=@{/festivals/__${activity.id}__}">
+            <!--<span th:utext="${activity.id}"></span>-->
+<!--            <a th:href="@{/festivals/__${activity.id}__}">Добавить артиста</a>
+            <a th:href="@{/festivals/__${activity.id}__}">Редактировать</a>
+            <a th:href="@{/festivals/__${activity.id}__}">Удалить</a>-->
 <!--            <h2><u>STANCE</u>: ЕЗДИМ НИЗКО</h2>
             <p>Stance - это вся культура низких машин.</p>
             <p>Stance (в переводе с англ. "посадка") — все чаще применяется к автомобилям относительно клиренса (дорожного просвета) и заменяет слово Drop (в переводе с англ. "падение"), которым обозначается заниженный и уроненный на самое брюхо автомобиль (дропнутый).</p>
@@ -28,7 +33,8 @@
             </div>-->
         </div>
     </section>
-
+    <!--TODO: Inifinite load-->
+    <!--TODO: Long request(30sec) для уведомлений-->
     <div lang="ru" th:replace="fragments/footer :: footer"></div>
 </div>
 </body>

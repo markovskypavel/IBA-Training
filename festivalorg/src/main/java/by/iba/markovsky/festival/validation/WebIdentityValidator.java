@@ -5,7 +5,6 @@ import by.iba.markovsky.festival.exception.ValidationException;
 import by.iba.markovsky.festival.util.RegExValidatorUtil;
 
 public class WebIdentityValidator {
-
     public static boolean isWebIdentityFormValid(String name, String surname, String age,
                                                  String username, String password, String email, String telephone) throws ValidationException {
         if (name == null || surname == null || age == null || username == null || password == null || email == null || telephone == null) {
@@ -22,5 +21,4 @@ public class WebIdentityValidator {
         }
         return true;
     }
-
 }

@@ -2,19 +2,26 @@ package by.iba.markovsky.festival.model;
 
 import by.iba.markovsky.festival.constant.RegExConstant;
 import by.iba.markovsky.festival.model.enumeration.ActivityType;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import io.swagger.annotations.ApiModel;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.Pattern;
 import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+@ApiModel(description="Activity")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @XmlRootElement(name = "Activity")
-@XmlType(propOrder = {"name","description","date","place","users","artists","activityType"})
+@XmlType(propOrder = {"id","name","description","date","place","users","artists","activityType"})
 @XmlSeeAlso({Artist.class, Place.class, WebIdentity.class, ActivityType.class})
 @Entity
 @Table(name = "Activity")
@@ -22,8 +29,7 @@ public class Activity implements Serializable {
 
     private static final long serialVersionUID = -6763387266714169960L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "activity_id", unique = true, updatable = false)
     private int id;
 
@@ -38,15 +44,16 @@ public class Activity implements Serializable {
     @Column(name = "description")
     private String description;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "date")
-    private Date date;
+    private Date date = new Date();
 
     @Valid
-    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+    @ManyToOne(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     @JoinColumn(name = "place_id", nullable = false)
     private Place place = new Place();
 
-    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER )
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.EAGER )
     @JoinTable(
             name="Activity_has_WebIdentity",
             joinColumns = {@JoinColumn(name="activity_id")},
@@ -54,7 +61,7 @@ public class Activity implements Serializable {
     )
     private Set<WebIdentity> users = new HashSet<>();
 
-    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER )
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.EAGER )
     @JoinTable(
             name="Activity_has_Artist",
             joinColumns = {@JoinColumn(name="activity_id")},
@@ -139,7 +146,7 @@ public class Activity implements Serializable {
     }
 
     //Getters
-    @XmlTransient
+    @XmlElement
     public int getId() {
         return id;
     }

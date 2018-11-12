@@ -1,14 +1,14 @@
 package by.iba.markovsky.festival;
 
-import by.iba.markovsky.festival.configuration.WebSecurityConfig;
+import by.iba.markovsky.festival.constant.ConfigConstant;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan("by.iba.markovsky.festival")
+@ComponentScan(ConfigConstant.BASE_PACKAGE)
 public class FestivalApplication {
 	public static void main(String[] args) {
-		SpringApplication.run(new Class[]{FestivalApplication.class, WebSecurityConfig.class}, args);
+		SpringApplication.run(FestivalApplication.class, args);
 	}
 }

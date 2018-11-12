@@ -9,4 +9,5 @@ import java.util.List;
 @Repository("artistRepository")
 public interface ArtistRepository extends CrudRepository<Artist, Integer> {
     List<Artist> findAll();
+    Artist findByName(String name);
 }

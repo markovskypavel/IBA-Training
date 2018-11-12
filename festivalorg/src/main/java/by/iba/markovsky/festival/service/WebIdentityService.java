@@ -16,20 +16,21 @@ import java.util.Optional;
 @Service("webIdentityService")
 @Transactional(rollbackFor = ServiceException.class)
 public class WebIdentityService {
-    
+
     @Autowired
     @Qualifier("webIdentityRepository")
     private WebIdentityRepository webIdentityRepository;
 
-    public void addUser(WebIdentity webIdentity) {
-        webIdentity.setRoleType(RoleType.ROLE_USER);
-        webIdentity.setPassword(EncryptedPasswordUtil.encrytePassword(webIdentity.getPassword()));
+    public void addOrUpdateWebIdentity(WebIdentity webIdentity) {
+        webIdentity.setPassword(EncryptedPasswordUtil.encrytePassword(webIdentity.getUnencryptedPassword()));
         webIdentityRepository.save(webIdentity);
     }
-    public void addAdmin(WebIdentity webIdentity) {
-        webIdentity.setRoleType(RoleType.ROLE_ADMIN);
-        webIdentity.setPassword(EncryptedPasswordUtil.encrytePassword(webIdentity.getPassword()));
-        webIdentityRepository.save(webIdentity);
+    public void setRole(WebIdentity webIdentity, boolean isAdmin) {
+        if (isAdmin) {
+            webIdentity.setRoleType(RoleType.ROLE_ADMIN);
+        } else {
+            webIdentity.setRoleType(RoleType.ROLE_USER);
+        }
     }
     public void deleteActivity(int id) {
         Optional<WebIdentity> user = webIdentityRepository.findById(id);

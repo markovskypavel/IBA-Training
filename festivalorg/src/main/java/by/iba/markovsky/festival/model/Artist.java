@@ -1,6 +1,10 @@
 package by.iba.markovsky.festival.model;
 
 import by.iba.markovsky.festival.constant.RegExConstant;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import io.swagger.annotations.ApiModel;
 
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
@@ -10,28 +14,29 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+@ApiModel(description="Artist")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @XmlRootElement(name = "Artist")
-@XmlType(propOrder = {"name","genre"})
+@XmlType(propOrder = {"id","name","genre"})
 @Entity
 @Table(name = "Artist")
 public class Artist implements Serializable {
 
     private static final long serialVersionUID = -4225549571954368009L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "artist_id", unique = true, updatable = false)
     private int id;
 
     @Pattern(regexp = RegExConstant.UNIQUE_NAME)
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
     @Pattern(regexp = RegExConstant.GENRE)
     @Column(name = "genre")
     private String genre;
 
-    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER, mappedBy = "artists")
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.EAGER, mappedBy = "artists")
 /*    @Fetch(value = FetchMode.SUBSELECT)
     @LazyCollection(LazyCollectionOption.TRUE)
     @Transient*/
@@ -83,10 +88,11 @@ public class Artist implements Serializable {
     }
 
     //Getters
-    @XmlTransient
+    @XmlElement
     public int getId() {
         return id;
     }
+    /*@JsonIgnore*/
     @XmlTransient
     public Set<Activity> getActivities() {
         return activities;

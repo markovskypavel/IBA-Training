@@ -4,9 +4,9 @@
 <body>
 <div id="wrapper">
     <div lang="ru" th:replace="fragments/navigation :: navigation"></div>
-    <div lang="ru" th:replace="fragments/authorization :: authorization"></div>
+    <!--TODO: Сдвинуть вниз-->
+    <section lang="ru" th:replace="fragments/errortemplate :: error(imgPath = @{/img/errorimg.png}, text = 'Произошла ошибка! Вы можете вернуться на главную страницу.')"></section>
     <div lang="ru" th:replace="fragments/footer :: footer"></div>
-    <!--TODO: Сделать remember me-->
 </div>
 </body>
 </html>

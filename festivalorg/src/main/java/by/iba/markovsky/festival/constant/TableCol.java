@@ -1,7 +1,6 @@
 package by.iba.markovsky.festival.constant;
 
 public interface TableCol {
-
     //Place
     String PLACE_ID_COL = "place_id";
     String ADDRESS_COL = "address";
@@ -32,5 +31,4 @@ public interface TableCol {
     String EMAIL_COL = "email";
     String TELEPHONE_COL = "telephone";
     String STATUS_COL = "status";
-
 }

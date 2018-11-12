@@ -4,12 +4,12 @@
       xmlns:th="http://www.thymeleaf.org">
 <div class="reg" th:fragment="register">
     <h2>Регистрация</h2>
-    <form name='regForm' th:action="@{/registration}" th:object="${webIdentity}" method='POST'>
+    <form name='regForm' th:action="@{/users/registration}" th:object="${webIdentity}" method='POST'>
         <input type="text" name="username" th:field="*{username}" placeholder="логин*" required/></br>
         <span class="error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username error</span></br>
 
-        <input type="text" name="password" th:field="*{password}" placeholder="пароль*" required/></br>
-        <span class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password error</span></br>
+        <input type="text" name="password" th:field="*{unencryptedPassword}" placeholder="пароль*" required/></br>
+        <span class="error" th:if="${#fields.hasErrors('unencryptedPassword')}" th:errors="*{unencryptedPassword}">Password error</span></br>
 
         <input type="email" name="email" th:field="*{email}" placeholder="эл.почта*" required/></br>
         <span class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</span></br>

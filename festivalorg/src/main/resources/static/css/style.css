@@ -11,9 +11,6 @@
 /* HOME CONTRAINER */
 body {
     background-color: var(--main-bg-color);
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
     margin: 0;
 }
 /* Обёртка */
@@ -464,7 +461,7 @@ a:hover {
     border-bottom: 2px solid var(--second-main-color);
 }
 /* Поля заполнения логина/регистрация*/
-.auth INPUT[type ="text"], .reg INPUT[type ="text"], .reg INPUT[type ="email"],
+.auth INPUT[type ="text"], .reg INPUT[type ="text"], .reg INPUT[type ="date"], .reg INPUT[type ="email"],
 .auth INPUT[type ="password"], .reg INPUT[type ="password"], .reg INPUT[type ="number"] {
     width: 200px;
     height: 30px;
@@ -478,12 +475,12 @@ a:hover {
     border: 2px solid var(--contract-color);
     color: var(--contract-color);
 }
-.auth INPUT[type ="text"]:focus, .reg INPUT[type ="text"]:focus, .reg INPUT[type ="email"]:focus,
+.auth INPUT[type ="text"]:focus, .reg INPUT[type ="text"]:focus, .reg INPUT[type ="date"]:focus, .reg INPUT[type ="email"]:focus,
 .auth INPUT[type ="password"]:focus, .reg INPUT[type ="password"]:focus, .reg INPUT[type ="number"]:focus {
     border: 2px solid var(--contract-color);
     color: var(--contract-color);
 }
-.auth INPUT[type ="text"]:focus::placeholder, .reg INPUT[type ="text"]:focus::placeholder, .reg INPUT[type ="email"]:focus::placeholder,
+.auth INPUT[type ="text"]:focus::placeholder, .reg INPUT[type ="text"]:focus::placeholder, .reg INPUT[type ="date"]:focus::placeholder, .reg INPUT[type ="email"]:focus::placeholder,
 .auth INPUT[type ="password"]:focus::placeholder, .reg INPUT[type ="password"]:focus::placeholder, .reg INPUT[type ="number"]:focus::placeholder {
     opacity: 0;
 }
@@ -518,6 +515,27 @@ a:hover {
 .auth a:hover {
     text-decoration: underline;
 }
+textarea {
+    width: 200px;
+    height: 77px;
+    resize: none;
+    padding: 3px;
+    box-sizing: border-box;
+    background: var(--main-bg-color);
+    border: none;
+    outline: none;
+    font: 15px 'Cuprum', sans-serif;
+    color: var(--contract-color);
+}
+
+textarea:focus {
+    border: 2px solid var(--contract-color);
+    color: var(--contract-color);
+}
+
+textarea:focus::placeholder {
+    opacity: 0;
+}
 /*Строка с ошибками*/
 .error {
     font-size: 14px;
@@ -542,7 +560,7 @@ a:hover {
 
 /* Картинка на тёмном фоне */
 .visible {
-    background-size: cover;
+    background-color: var(--second-main-color);
     position: fixed;
     left: 50%;
     right: 50%;

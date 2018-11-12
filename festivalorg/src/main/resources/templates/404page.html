@@ -4,7 +4,8 @@
 <body>
 <div id="wrapper">
     <div lang="ru" th:replace="fragments/navigation :: navigation"></div>
-    <section lang="ru" th:replace="fragments/error :: error(imgPath = @{/img/404.png}, text = 'Упс! Ресурс не найден!')"></section>
+    <!--TODO: Сдвинуть вниз-->
+    <section lang="ru" th:replace="fragments/errortemplate :: error(imgPath = @{/img/404.png}, text = 'Упс! Ресурс не найден!')"></section>
     <div lang="ru" th:replace="fragments/footer :: footer"></div>
 </div>
 </body>

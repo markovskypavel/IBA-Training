@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class FileUploadController {
 
+    //TODO: Просто сделать
 /*    @Value("${generator.service.strings.count}")
     public String uploadDirectory = System.getProperty("user.dir")+"/uploads";
 

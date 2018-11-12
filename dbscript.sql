@@ -20,7 +20,7 @@ USE `FestivalOrganisation` ;
 CREATE TABLE IF NOT EXISTS `FestivalOrganisation`.`Place` (
   `place_id` INT NOT NULL AUTO_INCREMENT,
   `address` VARCHAR(45) NOT NULL,
-  `capacity` INT NOT NULL,
+  `capacity` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`place_id`))
 ENGINE = InnoDB;
 
@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS `FestivalOrganisation`.`Identity` (
   `identity_id` INT NOT NULL AUTO_INCREMENT,
   `surname` VARCHAR(45) NULL,
   `name` VARCHAR(45) NOT NULL,
-  `age` INT NULL,
+  `age` VARCHAR(45) NULL,
   PRIMARY KEY (`identity_id`))
 ENGINE = InnoDB;
 

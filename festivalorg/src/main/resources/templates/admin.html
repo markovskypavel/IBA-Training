@@ -1,10 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html lang="ru"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="fragments/header :: header (requireData = @{/js/admin})"></head>
 <body>
+<div id="wrapper">
+    <div lang="ru" th:replace="fragments/navigation :: navigation"></div>
 
+    <aside>
+        <div class="activity" th:if="${artists.isEmpty()}">
+            <p>Артисты отсутствуют</p>
+        </div>
+        <div class="activity" th:each="artist : ${artists}">
+            <h2 th:utext="'<u>' + ${artist.name} + '</u>'"></h2>
+            <p th:utext="'<u>Жанр</u>: ' + ${artist.genre}"></p>
+            <div class="activityWork">
+                <input type="button" name="moreArtist" th:value="Подробнее" th:attr="data-url=@{/artists/__${artist.id}__}">
+                <input type="button" name="deleteArtist" th:value="Удалить" th:attr="data-url=@{/artists/__${artist.id}__/delete}">
+                <input type="button" name="editArtist" th:value="Редактировать" th:attr="data-url=@{/artists/__${artist.id}__/edit}">
+            </div>
+        </div>
+    </aside>
+<!--    String ADD_ACTIVITY_ARTIST = "/activities/{activityId}/artists/{artistId}/add";+
+    String REMOVE_ACTIVITY_ARTIST = "/activities/{activityId}/artists/{artistId}/remove";+
+    String GET_UNUSED_ARTISTS = "/artists/{activityId}/unused";+
+    String GET_USED_ARTISTS = "/artists/{activityId}/used";+-->
+    <section class="adminSection">
+        <div class="activityWork">
+            <a th:href="@{/activities/add}">Добавить фестиваль</a>
+            <a th:href="@{/artists/add}">Добавить артиста</a>
+        </div>
+
+        <div class="activity" th:if="${activities.isEmpty()}">
+            <p>События отсутствуют</p>
+        </div>
+
+        <div class="activity" th:each="activity : ${activities}">
+            <h2 th:utext="'<u>' + ${activity.activityType} + '</u>: ' + ${activity.name}"></h2>
+            <p th:utext="'<u>Дата проведения</u>: ' + ${#dates.format(activity.date, 'dd-MM-yyyy')}"></p>
+            <p th:utext="'<u>Место</u>: ' + ${activity.place.address}"></p>
+            <div class="activityWork">
+                <input type="button" name="more" th:value="Подробнее" th:attr="data-url=@{/activities/__${activity.id}__}">
+                <input type="button" name="deleteActivity" th:value="Удалить" th:attr="data-url=@{/activities/__${activity.id}__/delete}">
+                <input type="button" name="editActivity" th:value="Редактировать" th:attr="data-url=@{/activities/__${activity.id}__/edit}">
+            </div>
+            <div class="activityWork">
+                <input type="button" name="addActivityArtist" th:value="'Добавить артиста'" th:attr="data-url=@{/}">
+                <input type="button" name="deleteActivityArtist" th:value="'Удалить артиста'" th:attr="data-url=@{/}">
+            </div>
+        </div>
+
+    </section>
+
+    <div lang="ru" th:replace="fragments/footer :: footer"></div>
+</div>
 </body>
 </html>

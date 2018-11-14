@@ -1,41 +1,41 @@
 <!DOCTYPE html>
-<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<html lang="ru"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head th:replace="fragments/header :: header (requireData = @{/js/main})"></head>
 <body>
 <div id="wrapper">
     <div lang="ru" th:replace="fragments/navigation :: navigation"></div>
-
     <div lang="ru" th:replace="fragments/slider :: slider"></div>
 
     <section>
         <blockquote>
-            <p>ПОСЛЕДНИЕ ФЕСТИВАЛИ</p>
+            <p>ДОСТУПНЫЕ СОБЫТИЯ</p>
         </blockquote>
-        <a th:href="@{/festivals/add}">Добавить фестиваль</a>
-        <a th:href="@{/artists/add}">Добавить артиста</a>
-        <div class="news" id="Stance" th:each="activity:${activities}">
-            <input type="button" name="festival" th:value="'Фестиваль №' + ${activity.id}" th:attr="data-url=@{/festivals/__${activity.id}__}">
-            <!--<span th:utext="${activity.id}"></span>-->
-<!--            <a th:href="@{/festivals/__${activity.id}__}">Добавить артиста</a>
-            <a th:href="@{/festivals/__${activity.id}__}">Редактировать</a>
-            <a th:href="@{/festivals/__${activity.id}__}">Удалить</a>-->
-<!--            <h2><u>STANCE</u>: ЕЗДИМ НИЗКО</h2>
-            <p>Stance - это вся культура низких машин.</p>
-            <p>Stance (в переводе с англ. "посадка") — все чаще применяется к автомобилям относительно клиренса (дорожного просвета) и заменяет слово Drop (в переводе с англ. "падение"), которым обозначается заниженный и уроненный на самое брюхо автомобиль (дропнутый).</p>
-            <p>К ней относятся VW, ВАЗ, Opel, BMW и все остальные марки и модели автомобилей, выдержанные в общих традициях- правильные диски и посадка, а также наличие изюминки, позволяющей автомобилю отличаться от себе подобных (например, редкие OEM-фары от Golf MK2 Rallye на Jetta MK2 и т.д.). Так что неважно, Daewoo Lanos это или же Audi A6. Главное то, чтобы машины были стильными!</p>
-            <div class="news-pictures">
-                <figure>
-                    <img src="${pageContext.request.contextPath}/resource/news11.jpg" title="DC Team" alt="news11">
-                </figure>
-                <figure>
-                    <img src="${pageContext.request.contextPath}/resource/news12.jpg" title="Map of tour" alt="news12">
-                </figure>
-            </div>-->
+        <div class="activity" th:if="${activities.isEmpty()}">
+            <p>События отсутствуют</p>
         </div>
+
+        <div class="activity" th:each="activity : ${activities}">
+            <h2 th:utext="'<u>' + ${activity.activityType} + '</u>: ' + ${activity.name}"></h2>
+            <p th:utext="'<u>Дата проведения</u>: ' + ${#dates.format(activity.date, 'dd-MM-yyyy')}"></p>
+            <p th:utext="'<u>Место</u>: ' + ${activity.place.address}"></p>
+            <div class="activityWork">
+                <input type="button" name="more" th:value="Подробнее" th:attr="data-url=@{/activities/__${activity.id}__}">
+                <input type="button" name="subscribe" sec:authorize="isAuthenticated()"
+                       th:if="${!userActivities.contains(activity)}" th:value="Подписаться"
+                       th:attr="data-url=@{/activities/__${activity.id}__/users/__${#authentication.getPrincipal().getUsername()}__/subscribe}">
+                <input type="button" name="unsubscribe" sec:authorize="isAuthenticated()"
+                       th:if="${userActivities.contains(activity)}" th:value="Отписаться"
+                       th:attr="data-url=@{/activities/__${activity.id}__/users/__${#authentication.getPrincipal().getUsername()}__/unsubscribe}">
+            </div>
+        </div>
+
     </section>
-    <!--TODO: Inifinite load-->
-    <!--TODO: Long request(30sec) для уведомлений-->
+
     <div lang="ru" th:replace="fragments/footer :: footer"></div>
+    <!--TODO: Inifinite load-->
 </div>
 </body>
 </html>

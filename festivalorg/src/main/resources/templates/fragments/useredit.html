@@ -2,7 +2,7 @@
 <html lang="ru"
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-<div class="reg" th:fragment="register">
+<div class="reg" th:fragment="useredit">
     <h2>Регистрация</h2>
     <form name='regForm' th:action="@{/users/registration}" th:object="${webIdentity}" method='POST'>
         <input type="text" name="username" th:field="*{username}" placeholder="логин*" required/></br>

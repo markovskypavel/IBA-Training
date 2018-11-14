@@ -11,7 +11,6 @@ import java.util.List;
 public interface ActivityRepository extends CrudRepository<Activity, Integer> {
     List<Activity> findAll();
     /*@Query("select a from Activity a join a.users u where u.username in :username ORDER BY id ASC")*/
-    //TODO: Проверить запрос
     List<Activity> findAllActivitiesByUsers_username(String username);
     Activity findByName(String name);
 }

@@ -35,7 +35,7 @@ public class ActivityController {
     //Params необходим для определения конкретной кнопки
     @RequestMapping(value = MappingConstant.ADD_ACTIVITY, method = RequestMethod.POST/*, params = "festival"*/)
     public String addActivity(@Valid @ModelAttribute(value = "activity") Activity activity,
-                              BindingResult bindingResult, HttpServletRequest req) throws LimitException {
+                              BindingResult bindingResult, HttpServletRequest req) {
         if (bindingResult.hasErrors()) {
             return HTMLConstant.ACTIVITY_PAGE;
         }

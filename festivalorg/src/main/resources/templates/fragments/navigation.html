@@ -10,6 +10,7 @@
         <li sec:authorize="!isAuthenticated()"><a th:href="@{/login}">ВХОД</a></li>
         <li sec:authorize="hasRole('ADMIN')"><a th:href="@{/admin}" th:utext="'Hi, ' + ${#request.userPrincipal.name} + '!'">АДМИНИСТРАТОР</a></li>
         <li sec:authorize="hasRole('USER')"><a th:href="@{/user}" th:utext="'Hi, ' + ${#request.userPrincipal.name} + '!'">КАБИНЕТ</a></li>
+        <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">ВЫХОД</a></li>
     </ul>
 </nav>
 </html>

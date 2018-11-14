@@ -12,7 +12,8 @@ import by.iba.markovsky.festival.service.WebIdentityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.view.RedirectView;
+
+import java.util.List;
 
 @RestController
 public class RestActivityController {
@@ -72,11 +73,29 @@ public class RestActivityController {
         activityService.removeArtist(activity, artist);
     }
 
+    @RequestMapping(value = MappingConstant.GET_UNUSED_ARTISTS, method = RequestMethod.GET)
+    public List<Artist> findUnusedArtists(@PathVariable("activityId") int activityId) throws NotFoundException {
+        Activity activity = activityService.getActivityById(activityId);
+        if (activity == null) {
+            throw new NotFoundException();
+        }
+        return artistService.getAllUnusedArtists(activity);
+    }
+
+    @RequestMapping(value = MappingConstant.GET_USED_ARTISTS, method = RequestMethod.GET)
+    public List<Artist> findUsedArtists(@PathVariable("activityId") int activityId) throws NotFoundException {
+        Activity activity = activityService.getActivityById(activityId);
+        if (activity == null) {
+            throw new NotFoundException();
+        }
+        return artistService.getAllUsedArtists(activity);
+    }
+
     @RequestMapping(value = MappingConstant.SUBSCRIBE, method = RequestMethod.POST)
     public void subscribeUser(@PathVariable("activityId") int activityId,
-                              @PathVariable("userId") int userId) throws LimitException, NotFoundException {
+                              @PathVariable("username") String username) throws LimitException, NotFoundException {
         Activity activity = activityService.getActivityById(activityId);
-        WebIdentity user = webIdentityService.getUserById(userId);
+        WebIdentity user = webIdentityService.getUserByUsername(username);
         if (activity == null || user == null) {
             throw new NotFoundException();
         }
@@ -85,9 +104,9 @@ public class RestActivityController {
 
     @RequestMapping(value = MappingConstant.UNSUBSCRIBE, method = RequestMethod.POST)
     public void unsubscribeUser(@PathVariable("activityId") int activityId,
-                                @PathVariable("userId") int userId) throws NotFoundException {
+                                @PathVariable("username") String username) throws NotFoundException {
         Activity activity = activityService.getActivityById(activityId);
-        WebIdentity user = webIdentityService.getUserById(userId);
+        WebIdentity user = webIdentityService.getUserByUsername(username);
         if (activity == null || user == null) {
             throw new NotFoundException();
         }

@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/header :: header (requireData = @{/js/about})"></head>
+<head th:replace="fragments/header :: header (requireData = @{/js/secondary})"></head>
 <body>
 <div id="wrapper">
     <div lang="ru" th:replace="fragments/navigation :: navigation"></div>
-    <!--TODO: Сдвинуть вниз-->
     <section lang="ru" th:replace="fragments/errortemplate :: error(imgPath = @{/img/errorimg.png}, text = 'Произошла ошибка! Вы можете вернуться на главную страницу.')"></section>
     <div lang="ru" th:replace="fragments/footer :: footer"></div>
 </div>

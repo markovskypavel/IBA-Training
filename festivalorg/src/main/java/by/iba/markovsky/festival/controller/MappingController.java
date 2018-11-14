@@ -31,7 +31,11 @@ public class MappingController {
     private ArtistService artistService;
 
     @RequestMapping(value = MappingConstant.HOME, method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView home(HttpServletRequest req, HttpServletResponse resp, Model model) {
+    public ModelAndView home(HttpServletRequest req, HttpServletResponse resp, Model model, Principal principal) {
+        if(principal != null){
+            User loginedUser = (User) ((Authentication) principal).getPrincipal();
+            model.addAttribute("userActivities", activityService.getAllActivitiesByUsername(loginedUser.getUsername()));
+        }
         model.addAttribute("activities", activityService.getAllActivities());
         return new ModelAndView(HTMLConstant.HOME_PAGE);
     }

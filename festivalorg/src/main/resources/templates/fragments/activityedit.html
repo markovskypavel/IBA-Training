@@ -2,13 +2,12 @@
 <html lang="ru"
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-<div class="reg" th:fragment="add">
-    <h2>Регистрация</h2>
-    <form name='regForm' th:action="@{/festivals/add}" th:object="${activity}" method='POST'>
+<div class="reg" th:fragment="activityedit">
+    <h2>Добавление события</h2>
+    <form name='regForm' th:action="@{/activities/add}" th:object="${activity}" method='POST'>
         <input type="text" name="name" th:field="*{name}" placeholder="название*" required/></br>
         <span class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</span></br>
 
-        <!--TODO: Паттерн для даты-->
         <input type="date" name="date" th:field="*{date}" placeholder="дата" required/></br>
         <span class="error" th:if="${#fields.hasErrors('date')}" th:errors="*{date}">Date error</span></br>
 

@@ -32,7 +32,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
 
-        //TODO: Правильно ностроить маппинг
         // The pages does not require login
         http.authorizeRequests().antMatchers(HOME, ABOUT_US, LOGIN, DENIED, NOT_FOUND, REGISTRATION, ERROR, GET_ACTIVITY, GET_ARTIST).permitAll();
         //For authenticated users
@@ -44,12 +43,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         // For ADMIN only.
         http.authorizeRequests().antMatchers(ADMIN, ADD_ACTIVITY, EDIT_ACTIVITY, DELETE_ACTIVITY,
-                ADD_ARTIST, EDIT_ARTIST, DELETE_ARTIST, ADD_ACTIVITY_ARTIST, REMOVE_ACTIVITY_ARTIST).access("hasRole('ADMIN')");
+                ADD_ARTIST, EDIT_ARTIST, DELETE_ARTIST, ADD_ACTIVITY_ARTIST, REMOVE_ACTIVITY_ARTIST, GET_UNUSED_ARTISTS).access("hasRole('ADMIN')");
 
         // When the user has logged in as XX.
         // But access a page that requires role YY,
         // AccessDeniedException will be thrown.
-        //TODO: установить обработчик
         http.authorizeRequests().and().exceptionHandling().accessDeniedPage(DENIED);
 
         // Config for Login Form

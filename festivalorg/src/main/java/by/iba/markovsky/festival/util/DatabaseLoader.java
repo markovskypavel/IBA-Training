@@ -5,6 +5,7 @@ import by.iba.markovsky.festival.model.enumeration.ActivityType;
 import by.iba.markovsky.festival.model.enumeration.RoleType;
 import by.iba.markovsky.festival.repository.ActivityRepository;
 import by.iba.markovsky.festival.repository.WebIdentityRepository;
+import by.iba.markovsky.festival.service.ActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
@@ -21,6 +22,10 @@ public class DatabaseLoader implements CommandLineRunner {
     @Autowired
     @Qualifier("webIdentityRepository")
     private WebIdentityRepository webIdentityRepository;
+
+    @Autowired
+    @Qualifier("activityService")
+    private ActivityService activityService;
 
     @Autowired
     @Qualifier("activityRepository")

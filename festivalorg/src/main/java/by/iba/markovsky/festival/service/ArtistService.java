@@ -3,6 +3,7 @@ package by.iba.markovsky.festival.service;
 import by.iba.markovsky.festival.exception.ServiceException;
 import by.iba.markovsky.festival.model.Activity;
 import by.iba.markovsky.festival.model.Artist;
+import by.iba.markovsky.festival.repository.ActivityRepository;
 import by.iba.markovsky.festival.repository.ArtistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -37,6 +38,12 @@ public class ArtistService {
     public Artist getArtistByName(String name) {
         Artist artist = artistRepository.findByName(name);
         return artist;
+    }
+    public List<Artist> getAllUnusedArtists(Activity activity) {
+        return artistRepository.findByActivitiesIsNotContaining(activity);
+    }
+    public List<Artist> getAllUsedArtists(Activity activity) {
+        return artistRepository.findByActivities_id(activity.getId());
     }
     public List<Artist> getAllArtists() {
         return artistRepository.findAll();

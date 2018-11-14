@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header (requireData = @{/js/secondary})"></head>
 <body>
-
+<div id="wrapper">
+    <div lang="ru" th:replace="fragments/navigation :: navigation"></div>
+    <div lang="ru" th:replace="fragments/artistedit :: artistedit"></div>
+    <div lang="ru" th:replace="fragments/footer :: footer"></div>
+</div>
 </body>
 </html>

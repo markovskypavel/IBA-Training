@@ -11,12 +11,13 @@
             <a th:href="@{/about}">О НАС</a>
         </div>
         <div>
-            <a href="https://twitter.com/markovskypavel">ПОДДЕРЖКА</a>
-        </div>
-        <div>
             <a th:href="@{/login}" sec:authorize="!isAuthenticated()">ВХОД</a>
             <a th:href="@{/admin}" sec:authorize="hasRole('ADMIN')">КАБИНЕТ</a>
             <a th:href="@{/user}" sec:authorize="hasRole('USER')">КАБИНЕТ</a>
+            <a th:href="@{/logout}" sec:authorize="isAuthenticated()">ВЫХОД</a>
+        </div>
+        <div>
+            <a href="https://twitter.com/markovskypavel">ПОДДЕРЖКА</a>
         </div>
     </div>
     <div id="social">

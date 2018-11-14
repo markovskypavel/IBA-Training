@@ -3,12 +3,12 @@ require.config({
     paths: {
         "jquery": "libs/jquery",
         "bootstrap": "libs/bootstrap",
-        "slider": "modules/slider",
         "navbar": "modules/navbar",
-        "datamain": "modules/datamain"
+        "datamain": "modules/datamain",
+        "dataadmin": "modules/dataadmin"
     }
 });
 
-require(['navbar', 'slider', 'datamain'], function () {
+require(['navbar', 'dataadmin', 'datamain'], function () {
 
 });

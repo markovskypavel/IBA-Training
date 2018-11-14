@@ -15,7 +15,7 @@ body {
 }
 /* Обёртка */
 #wrapper {
-    min-width: 780px; /* Задать ширину (убрать для флекса) */
+    min-width: 850px; /* Задать ширину (убрать для флекса) */
     margin: auto;
     box-sizing: border-box;
 }
@@ -40,7 +40,7 @@ nav a {
     left: 0;
     z-index: 9999;
     width: 100%;
-    min-width: 780px;
+    min-width: 850px;
 
     background-color: var(--first-main-color);
     display: flex;
@@ -65,7 +65,12 @@ nav a {
 
 /* =====SECTION===== */
 section {
-    padding-bottom: 50px;
+    padding-bottom: 100px;
+}
+.adminSection {
+    margin-top: 80px;
+    margin-left: 280px;
+    padding-bottom: 470px;
 }
 blockquote {
     margin: 0;
@@ -131,75 +136,47 @@ p {
     color: var(--second-main-color);
     text-align: justify;
 }
-/* Сводка, которая остается на месте при прокрутке */
-.news-aside {
-    position: fixed;
-    width: 240px;
+
+/* Название события */
+.activity > h2 {
+    background: var(--first-main-color);
+    font: 20px var(--main-font), sans-serif;
+    color: var(--second-main-color);
+    padding: 5px 0 5px 0;
+    margin: 0;
+    text-align: center;
+    border-bottom: 2px solid var(--second-main-color);
+    border-radius: 8px 8px 0 0;
 }
 
-/* Дата новостей */
-.news > h2 {
-    background: #F7CD44;
-    font: 20px 'Pattaya', sans-serif;
-    color: rgba(36, 36, 36, 1);
-    padding: 0 10px 0 20px;
-    margin: 15.2px 0 0 0;
-    text-align: left;
+.activity {
+    margin: 10px 10px 0 10px;
+    border: 2px solid var(--second-main-color);
+    border-radius: 8px;
+    padding: 0.1px;
 }
 
-/* Текст */
-.news p {
-    margin: 20px 20px 0 0;
-    font: 17px var(--contrast-font), sans-serif;
-    color: white;
-    text-align: justify;
+.activity p {
+    color: var(--contract-color);
+    margin: 10px 0 10px 10px;
 }
 
-/* Картинки в новостях */
-.news figure > img {
-    display: block;
-    outline: 1px solid #F7CD44;
-    margin-top: 20px;
-    cursor: pointer;
-    /* Размеры картинок */
-    width: 192px;
-    height: 108px;
-}
-
-/* При наведении увеличивается граница картинки новостей */
-.news figure > img:hover {
-    animation: borderPictures;
-    animation-delay: 0s;
-    animation-duration: 0.3s;
-    /* 	Картинка останется после анимации */
-    animation-fill-mode: forwards;
-    animation-timing-function: ease-in-out;
-    animation-iteration-count: 1;
-}
-
-/* Расстояние между картинками */
-.news figure + figure {
-    margin-left: 20px;
-}
-
-/* Блок для центрирования картинок */
-.news-pictures {
+.activityWork {
     text-align: center;
 }
 
-/* Если экран меньше 760px, то картинки смещаются */
-@media (max-width: 760px) {
-    .news-pictures {
-        text-align: left;
-    }
-
-    .news figure + figure {
-        margin-left: 0;
-    }
+.activityWork a {
+    margin: 20px;
+    font: 15px var(--contrast-font), sans-serif;
 }
 
-.news {
-    margin-top: 100px;
+.activityWork INPUT[type="button"] {
+    margin: 0 10px 10px 10px;
+}
+
+.activityUserSection {
+    margin-top: 80px;
+    padding-bottom: 470px;
 }
 
 /* =====SLIDER===== */
@@ -207,7 +184,7 @@ p {
     /* Для размещения на фул ширину страницы */
     margin-top: 70px;
     height: 44vw;
-    min-height: 300px;
+    min-height: 380px;
     width: 100%;
     min-width: 780px;
 
@@ -376,6 +353,7 @@ footer p {
 aside {
     float: left;
     width: 250px;
+    margin-top: 20px;
 }
 /* FOUNDER */
 aside.founder {
@@ -485,8 +463,8 @@ a:hover {
     opacity: 0;
 }
 /* Кнопка подтверждения для авторизации/регистрации */
-.auth INPUT[type ="submit"], .reg INPUT[type ="submit"], .auth INPUT[type ="button"] {
-    width: 200px;
+.auth INPUT[type ="submit"], .reg INPUT[type ="submit"], INPUT[type ="button"] {
+    width: 150px;
     height: 30px;
     padding: 3px;
     margin: 10px 0 0 0;
@@ -497,12 +475,12 @@ a:hover {
     font: 15px var(--contrast-font), sans-serif;
     color: var(--first-main-color);
 }
-.auth INPUT[type ="submit"]:hover, .reg INPUT[type ="submit"]:hover, .auth INPUT[type ="button"]:hover {
+.auth INPUT[type ="submit"]:hover, .reg INPUT[type ="submit"]:hover, INPUT[type ="button"]:hover {
     background: var(--contract-color);
     color: var(--first-main-color);
     cursor: pointer;
 }
-.auth INPUT[type ="submit"]:active, .reg INPUT[type ="submit"]:active, .auth INPUT[type ="button"]:active {
+.auth INPUT[type ="submit"]:active, .reg INPUT[type ="submit"]:active, INPUT[type ="button"]:active {
     background: var(--main-bg-color);
     color: var(--contract-color);
     cursor: pointer;
@@ -546,6 +524,11 @@ textarea:focus::placeholder {
 }
 
 /* =====МОДАЛЬНОЕ ОКНО===== */
+/* Блок со всплывающим окном */
+#win {
+    opacity: 0;
+}
+
 /* Тёмный фон */
 .overlay {
     background: #000;
@@ -554,25 +537,33 @@ textarea:focus::placeholder {
     right: 0;
     top: 0;
     bottom: 0;
-    z-index: 1000;
+    z-index: 3000;
     opacity: .5;
 }
 
-/* Картинка на тёмном фоне */
+/* Всплывающее окно на тёмном фоне */
 .visible {
-    background-color: var(--second-main-color);
+    background-color: var(--first-main-color);
     position: fixed;
     left: 50%;
     right: 50%;
-    top: 10%;
-    margin-left: -480px;
+    top: 30%;
+    margin-left: -250px;
     overflow: hidden;
-    z-index: 2000;
-    width: 960px;
-    height: 540px;
-    padding: 0px;
+    z-index: 4000;
+    width: 500px;
+    height: 300px;
+    padding: 10px;
     cursor: pointer;
-    outline: 5px solid #F7CD44;
+    outline: 5px solid var(--contract-color);
+}
+
+.visible pre {
+    font: 17px var(--contrast-font), sans-serif;
+    color: var(--contract-color);
+    margin: auto;
+    width: 50%;
+    text-align: center;
 }
 
 /* Затемнение */
@@ -583,7 +574,6 @@ textarea:focus::placeholder {
     animation-fill-mode: forwards;
     animation-iteration-count: 1;
 }
-
 @keyframes opacityPictures {
     100% {
         opacity: .8;
@@ -591,16 +581,11 @@ textarea:focus::placeholder {
 }
 
 /* Если ширина экрана меньше 760px, то картинки сдвигаются */
-@media (max-width: 760px) {
+/*@media (max-width: 760px) {
     .visible {
         top: 15%;
         margin-left: -320px;
         width: 640px;
         height: 360px;
     }
-}
-
-/* Блок со всплывающим окном */
-#win {
-    opacity: 0;
-}
+}*/

@@ -13,8 +13,8 @@ public interface MappingConstant {
     //Activity RESTful routing
     String DELETE_ACTIVITY = "/activities/{id}/delete";
     String GET_ACTIVITY = "/activities/{id}";
-    String ADD_ACTIVITY_ARTIST = "/activities/{activityId}/artists/{artistId}/add";
-    String REMOVE_ACTIVITY_ARTIST = "/activities/{activityId}/artists/{artistId}/remove";
+    String ADD_ACTIVITY_ARTIST = "/activities/{activityId}/artists/unused/{artistId}/add";
+    String REMOVE_ACTIVITY_ARTIST = "/activities/{activityId}/artists/used/{artistId}/remove";
     String SUBSCRIBE = "/activities/{activityId}/users/{username}/subscribe";
     String UNSUBSCRIBE = "/activities/{activityId}/users/{username}/unsubscribe";
 
@@ -24,8 +24,8 @@ public interface MappingConstant {
     //Artist RESTful routing
     String DELETE_ARTIST = "/artists/{id}/delete";
     String GET_ARTIST = "/artists/{id}";
-    String GET_UNUSED_ARTISTS = "/artists/{activityId}/unused";
-    String GET_USED_ARTISTS = "/artists/{activityId}/used";
+    String GET_UNUSED_ARTISTS = "/activities/{activityId}/artists/unused";
+    String GET_USED_ARTISTS = "/activities/{activityId}/artists/used";
 
     //Authentication routing
     String LOGIN = "/login";

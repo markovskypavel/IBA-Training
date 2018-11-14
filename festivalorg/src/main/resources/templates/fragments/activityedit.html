@@ -2,27 +2,30 @@
 <html lang="ru"
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-<div class="reg" th:fragment="activityedit">
-    <h2>Добавление события</h2>
+<div class="reg" th:fragment="activityedit(action)">
+    <h2>События</h2>
     <form name='regForm' th:action="@{/activities/add}" th:object="${activity}" method='POST'>
-        <input type="text" name="name" th:field="*{name}" placeholder="название*" required/></br>
-        <span class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</span></br>
+        <input type="hidden" th:name="${action}">
+        <input type="hidden" th:field="${activity.id}">
 
-        <input type="date" name="date" th:field="*{date}" placeholder="дата" required/></br>
-        <span class="error" th:if="${#fields.hasErrors('date')}" th:errors="*{date}">Date error</span></br>
+        <input type="text" name="name" th:field="*{name}" placeholder="название*" required/>
+        <span class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</span>
 
-        <input type="text" name="address" th:field="*{place.address}" placeholder="адрес*" required/></br>
-        <span class="error" th:if="${#fields.hasErrors('place.address')}" th:errors="*{place.address}">Address error</span></br>
+        <input type="date" name="date" th:field="*{date}" placeholder="дата" required/>
+        <span class="error" th:if="${#fields.hasErrors('date')}" th:errors="*{date}">Date error</span>
 
-        <input type="number" name="capacity" th:field="*{place.capacity}" placeholder="кол-во мест*"/></br>
-        <span class="error" th:if="${#fields.hasErrors('place.capacity')}" th:errors="*{place.capacity}">Capacity error</span></br>
+        <input type="text" name="address" th:field="*{place.address}" placeholder="адрес*" required/>
+        <span class="error" th:if="${#fields.hasErrors('place.address')}" th:errors="*{place.address}">Address error</span>
 
-        <textarea name="description" th:field="*{description}" placeholder="описание"></textarea></br>
-        <span class="error" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Description error</span></br>
+        <input type="number" name="capacity" th:field="*{place.capacity}" placeholder="кол-во мест*"/>
+        <span class="error" th:if="${#fields.hasErrors('place.capacity')}" th:errors="*{place.capacity}">Capacity error</span>
 
-        <span class="error" th:if="${#request.getParameter('error') == 'true'}">Фестиваль уже существует</span></br>
-        <input type="submit" name="festival" value="Фестиваль"></br>
-        <input type="submit" name="concert" value="Концерт">
+        <textarea name="description" th:field="*{description}" placeholder="описание"></textarea>
+        <span class="error" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Description error</span>
+
+        <span class="error" th:if="${#request.getParameter('error') == 'true'}">Фестиваль уже существует</span>
+        <div><input type="submit" name="festival" value="Фестиваль"></div>
+        <div><input type="submit" name="concert" value="Концерт"></div>
     </form>
 </div>
 </html>

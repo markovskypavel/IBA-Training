@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Cuprum|Oswald');
 :root {
+    /*TODO: Поменять цвета*/
     --main-bg-color: #fbfbfb;
     --first-main-color: #e8ceb5;
     --second-main-color: #d4a06e;
@@ -444,7 +445,8 @@ a:hover {
     width: 200px;
     height: 30px;
     padding: 3px;
-    margin-top: 10px;
+    margin: 10px auto;
+    display: block;
     box-sizing: border-box;
     background: var(--main-bg-color);
     /*border: none;*/
@@ -498,6 +500,7 @@ textarea {
     height: 77px;
     resize: none;
     padding: 3px;
+    margin-top: 10px;
     box-sizing: border-box;
     background: var(--main-bg-color);
     border: none;

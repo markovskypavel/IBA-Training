@@ -30,7 +30,14 @@ public class ArtistController {
         return new ModelAndView(HTMLConstant.ARTIST_PAGE);
     }
 
-    @RequestMapping(value = MappingConstant.ADD_ARTIST, method = RequestMethod.POST)
+    @RequestMapping(value = MappingConstant.EDIT_ARTIST, method = RequestMethod.GET)
+    public ModelAndView editArtistPage(@PathVariable("id") int id, Model model) {
+        Artist artist = artistService.getArtistById(id);
+        model.addAttribute("artist", artist);
+        return new ModelAndView(HTMLConstant.ARTIST_PAGE_EDIT);
+    }
+
+    @RequestMapping(value = MappingConstant.ADD_ARTIST, method = RequestMethod.POST, params = "add")
     public String addArtist(@Valid @ModelAttribute(value = "artist") Artist artist, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return HTMLConstant.ARTIST_PAGE;
@@ -42,11 +49,13 @@ public class ArtistController {
         return "redirect:" + MappingConstant.HOME;
     }
 
-    @RequestMapping(value = MappingConstant.EDIT_ARTIST, method = RequestMethod.GET)
-    public ModelAndView editArtist(@PathVariable("id") int id, Model model) {
-        Artist artist = artistService.getArtistById(id);
-        model.addAttribute("artist", artist);
-        return new ModelAndView(HTMLConstant.ARTIST_PAGE);
+    @RequestMapping(value = MappingConstant.ADD_ARTIST, method = RequestMethod.POST, params = "edit")
+    public String editArtist(@Valid @ModelAttribute(value = "artist") Artist artist, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return HTMLConstant.ARTIST_PAGE;
+        }
+        artistService.addOrUpdateArtist(artist);
+        return "redirect:" + MappingConstant.HOME;
     }
 
 }

@@ -5,7 +5,8 @@ require.config({
         "bootstrap": "libs/bootstrap",
         "slider": "modules/slider",
         "navbar": "modules/navbar",
-        "datamain": "modules/datamain"
+        "datamain": "modules/datamain",
+        "transport": "modules/transport"
     }
 });
 

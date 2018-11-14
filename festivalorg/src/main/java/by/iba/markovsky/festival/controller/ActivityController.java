@@ -32,8 +32,15 @@ public class ActivityController {
         return new ModelAndView(HTMLConstant.ACTIVITY_PAGE);
     }
 
+    @RequestMapping(value = MappingConstant.EDIT_ACTIVITY, method = RequestMethod.GET)
+    public ModelAndView editActivityPage(@PathVariable("id") int id, Model model) {
+        Activity activity = activityService.getActivityById(id);
+        model.addAttribute("activity", activity);
+        return new ModelAndView(HTMLConstant.ACTIVITY_PAGE_EDIT);
+    }
+
     //Params необходим для определения конкретной кнопки
-    @RequestMapping(value = MappingConstant.ADD_ACTIVITY, method = RequestMethod.POST/*, params = "festival"*/)
+    @RequestMapping(value = MappingConstant.ADD_ACTIVITY, method = RequestMethod.POST, params = "add")
     public String addActivity(@Valid @ModelAttribute(value = "activity") Activity activity,
                               BindingResult bindingResult, HttpServletRequest req) {
         if (bindingResult.hasErrors()) {
@@ -47,11 +54,15 @@ public class ActivityController {
         return "redirect:" + MappingConstant.HOME;
     }
 
-    @RequestMapping(value = MappingConstant.EDIT_ACTIVITY, method = RequestMethod.GET)
-    public ModelAndView editActivity(@PathVariable("id") int id, Model model) {
-        Activity activity = activityService.getActivityById(id);
-        model.addAttribute("activity", activity);
-        return new ModelAndView(HTMLConstant.ACTIVITY_PAGE);
+    @RequestMapping(value = MappingConstant.ADD_ACTIVITY, method = RequestMethod.POST, params = "edit")
+    public String editActivity(@Valid @ModelAttribute(value = "activity") Activity activity,
+                              BindingResult bindingResult, HttpServletRequest req) {
+        if (bindingResult.hasErrors()) {
+            return HTMLConstant.ACTIVITY_PAGE;
+        }
+        activityService.setType(activity, req.getParameter("festival") != null);
+        activityService.addOrUpdateAdctivity(activity);
+        return "redirect:" + MappingConstant.HOME;
     }
 
 }

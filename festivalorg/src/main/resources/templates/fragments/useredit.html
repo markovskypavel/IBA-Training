@@ -5,30 +5,30 @@
 <div class="reg" th:fragment="useredit">
     <h2>Регистрация</h2>
     <form name='regForm' th:action="@{/users/registration}" th:object="${webIdentity}" method='POST'>
-        <input type="text" name="username" th:field="*{username}" placeholder="логин*" required/></br>
-        <span class="error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username error</span></br>
+        <input type="text" name="username" th:field="*{username}" placeholder="логин*" required/>
+        <span class="error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username error</span>
 
-        <input type="text" name="password" th:field="*{unencryptedPassword}" placeholder="пароль*" required/></br>
-        <span class="error" th:if="${#fields.hasErrors('unencryptedPassword')}" th:errors="*{unencryptedPassword}">Password error</span></br>
+        <input type="text" name="password" th:field="*{unencryptedPassword}" placeholder="пароль*" required/>
+        <span class="error" th:if="${#fields.hasErrors('unencryptedPassword')}" th:errors="*{unencryptedPassword}">Password error</span>
 
-        <input type="email" name="email" th:field="*{email}" placeholder="эл.почта*" required/></br>
-        <span class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</span></br>
+        <input type="email" name="email" th:field="*{email}" placeholder="эл.почта*" required/>
+        <span class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</span>
 
-        <input type="text" name="telephone" th:field="*{telephone}" placeholder="телефон"/></br>
-        <span class="error" th:if="${#fields.hasErrors('telephone')}" th:errors="*{telephone}">Telephone error</span></br>
+        <input type="text" name="telephone" th:field="*{telephone}" placeholder="телефон"/>
+        <span class="error" th:if="${#fields.hasErrors('telephone')}" th:errors="*{telephone}">Telephone error</span>
 
-        <input type="text" name="name" th:field="*{identity.name}" placeholder="имя*" required/></br>
-        <span class="error" th:if="${#fields.hasErrors('identity.name')}" th:errors="*{identity.name}">Name error</span></br>
+        <input type="text" name="name" th:field="*{identity.name}" placeholder="имя*" required/>
+        <span class="error" th:if="${#fields.hasErrors('identity.name')}" th:errors="*{identity.name}">Name error</span>
 
-        <input type="text" name="surname" th:field="*{identity.surname}" placeholder="фамилия"/></br>
-        <span class="error" th:if="${#fields.hasErrors('identity.surname')}" th:errors="*{identity.surname}">Surname error</span></br>
+        <input type="text" name="surname" th:field="*{identity.surname}" placeholder="фамилия"/>
+        <span class="error" th:if="${#fields.hasErrors('identity.surname')}" th:errors="*{identity.surname}">Surname error</span>
 
-        <input type="number" name="age" th:field="*{identity.age}" placeholder="возраст"/></br>
-        <span class="error" th:if="${#fields.hasErrors('identity.age')}" th:errors="*{identity.age}">Age error</span></br>
+        <input type="number" name="age" th:field="*{identity.age}" placeholder="возраст"/>
+        <span class="error" th:if="${#fields.hasErrors('identity.age')}" th:errors="*{identity.age}">Age error</span>
 
-        <span class="error" th:if="${#request.getParameter('error') == 'true'}">Пользователь уже существует</span></br>
-        <input type="submit" name="admin" value="Как админ"></br>
-        <input type="submit" name="user" value="Как юзер">
+        <span class="error" th:if="${#request.getParameter('error') == 'true'}">Пользователь уже существует</span>
+        <div><input type="submit" name="admin" value="Как админ"></div>
+        <div><input type="submit" name="user" value="Как юзер"></div>
     </form>
 </div>
 </html>

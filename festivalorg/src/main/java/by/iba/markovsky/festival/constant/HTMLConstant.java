@@ -7,17 +7,19 @@ public interface HTMLConstant {
     String USER_PAGE = "user";
 
     //Authentication pages
-    String LOGIN_PAGE = "login";
-    String REGISTRATION_PAGE = "registration";
+    String LOGIN_PAGE = "authenticationpages/login";
+    String REGISTRATION_PAGE = "authenticationpages/registration";
 
     //Activity pages
-    String ACTIVITY_PAGE = "activity";
+    String ACTIVITY_PAGE = "editpages/activity";
+    String ACTIVITY_PAGE_EDIT = "editpages/activityedit";
 
     //Artist pages
-    String ARTIST_PAGE = "artist";
+    String ARTIST_PAGE = "editpages/artist";
+    String ARTIST_PAGE_EDIT = "editpages/artistedit";
 
     //Error pages
-    String DENIED_PAGE = "403page";
-    String NOT_FOUND_PAGE = "404page";
+    String DENIED_PAGE = "errorpages/403page";
+    String NOT_FOUND_PAGE = "errorpages/404page";
     String ERROR_PAGE = "error";
 }

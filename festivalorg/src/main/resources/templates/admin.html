@@ -5,6 +5,7 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head th:replace="fragments/header :: header (requireData = @{/js/admin})"></head>
 <body>
+<!--TODO: CSS оформить + формы и js проверить-->
 <div id="wrapper">
     <div lang="ru" th:replace="fragments/navigation :: navigation"></div>
 
@@ -22,10 +23,7 @@
             </div>
         </div>
     </aside>
-<!--    String ADD_ACTIVITY_ARTIST = "/activities/{activityId}/artists/{artistId}/add";+
-    String REMOVE_ACTIVITY_ARTIST = "/activities/{activityId}/artists/{artistId}/remove";+
-    String GET_UNUSED_ARTISTS = "/artists/{activityId}/unused";+
-    String GET_USED_ARTISTS = "/artists/{activityId}/used";+-->
+
     <section class="adminSection">
         <div class="activityWork">
             <a th:href="@{/activities/add}">Добавить фестиваль</a>
@@ -46,8 +44,8 @@
                 <input type="button" name="editActivity" th:value="Редактировать" th:attr="data-url=@{/activities/__${activity.id}__/edit}">
             </div>
             <div class="activityWork">
-                <input type="button" name="addActivityArtist" th:value="'Добавить артиста'" th:attr="data-url=@{/}">
-                <input type="button" name="deleteActivityArtist" th:value="'Удалить артиста'" th:attr="data-url=@{/}">
+                <input type="button" name="addActivityArtist" th:value="'Добавить артиста'" th:attr="data-url=@{/activities/__${activity.id}__/artists/unused}">
+                <input type="button" name="deleteActivityArtist" th:value="'Удалить артиста'" th:attr="data-url=@{/activities/__${activity.id}__/artists/used}">
             </div>
         </div>
 

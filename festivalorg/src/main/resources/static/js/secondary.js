@@ -4,7 +4,8 @@ require.config({
         "jquery": "libs/jquery",
         "bootstrap": "libs/bootstrap",
         "navbar": "modules/navbar",
-        "datamain": "modules/datamain"
+        "datamain": "modules/datamain",
+        "transport": "modules/transport"
     }
 });
 

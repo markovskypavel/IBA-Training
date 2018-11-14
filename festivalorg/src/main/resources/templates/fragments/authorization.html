@@ -5,11 +5,11 @@
 <div class="auth" th:fragment="authorization">
     <h2>Авторизация</h2>
     <form name='authForm' th:action="@{/j_spring_security_check}" method='POST'>
-        <input type="text" name="username" placeholder="логин" required></br>
-        <input type="password" name="password" placeholder="пароль" required></br>
-        <span class="error" th:if="${#request.getParameter('error') == 'true'}">Неправильный логин или пароль</span></br>
-        <input type="submit" name="submit" value="Войти"></br>
-        <a th:href="@{/users/registration}">Создать учётную запись?</a>
+        <input type="text" name="username" placeholder="логин" required>
+        <input type="password" name="password" placeholder="пароль" required>
+        <span class="error" th:if="${#request.getParameter('error') == 'true'}">Неправильный логин или пароль</span>
+        <div><input type="submit" name="submit" value="Войти"></div>
+        <div><a th:href="@{/users/registration}">Создать учётную запись?</a></div>
         <!--            <span th:if="${#request.getParameter('error') == 'true'} and
                      ${#session!= null and #session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION') != null}"
                           th:utext="${#session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION')}">Static summary</span>-->

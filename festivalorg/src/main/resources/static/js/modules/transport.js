@@ -13,6 +13,10 @@ define("transport", ['jquery'], function ($) {
                 .then(function (response) {
                     if (response.status === 404) {
                         location.href = $('#contextPathHolder').data("contextpath") + '404';
+                    } else if (response.status === 500) {
+                        location.href = $('#contextPathHolder').data("contextpath") + 'error';
+                    } else if (response.status === 418) {
+                        alert('Извините, места на мероприятия закончились!');
                     } else {
                         location.reload();
                     }
@@ -21,7 +25,7 @@ define("transport", ['jquery'], function ($) {
                     console.log(error);
                 });
         },
-        getFetch: function (url, callback) {
+        getFetch: function (url, callbackHTML) {
             return fetch(url, {
                 method: 'GET',
                 credentials: 'include',
@@ -31,7 +35,7 @@ define("transport", ['jquery'], function ($) {
             })
                 .then((resp) => resp.json())
                 .then(function (data) {
-                    $('section').append(callback(data));
+                    $('section').append(callbackHTML(data));
                     $('.visible').bind("click", function () {
                         $('#win').animate({opacity: '0'}, 600, function () {
                             $('#win').remove();

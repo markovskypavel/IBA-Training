@@ -10,6 +10,6 @@ require.config({
     }
 });
 
-require(['navbar', 'slider', 'datamain'], function () {
+require(['navbar', 'slider', 'datamain'], function ($) {
 
 });

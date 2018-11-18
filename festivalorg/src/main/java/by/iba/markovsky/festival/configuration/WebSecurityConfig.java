@@ -24,6 +24,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+/*        auth.inMemoryAuthentication()
+                .withUser("admin")
+                .password("admin")
+                .roles("ADMIN");*/
         // Setting Service to find User in the database. And Setting PassswordEncoder.
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
@@ -39,7 +43,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         // If no login, it will redirect to /login page.
         // For USER only.
-        http.authorizeRequests().antMatchers(USER).access("hasAnyRole('USER', 'ADMIN')");
+        http.authorizeRequests().antMatchers(USER).access("hasAnyRole('USER')");
 
         // For ADMIN only.
         http.authorizeRequests().antMatchers(ADMIN, ADD_ACTIVITY, EDIT_ACTIVITY, DELETE_ACTIVITY,

@@ -58,7 +58,7 @@ public class ActivityController {
     public String editActivity(@Valid @ModelAttribute(value = "activity") Activity activity,
                               BindingResult bindingResult, HttpServletRequest req) {
         if (bindingResult.hasErrors()) {
-            return HTMLConstant.ACTIVITY_PAGE;
+            return HTMLConstant.ACTIVITY_PAGE_EDIT;
         }
         activityService.setType(activity, req.getParameter("festival") != null);
         activityService.addOrUpdateAdctivity(activity);

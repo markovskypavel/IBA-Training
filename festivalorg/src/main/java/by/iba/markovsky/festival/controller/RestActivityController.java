@@ -8,6 +8,7 @@ import by.iba.markovsky.festival.model.Artist;
 import by.iba.markovsky.festival.model.WebIdentity;
 import by.iba.markovsky.festival.service.ActivityService;
 import by.iba.markovsky.festival.service.ArtistService;
+import by.iba.markovsky.festival.service.EmailService;
 import by.iba.markovsky.festival.service.WebIdentityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -29,6 +30,10 @@ public class RestActivityController {
     @Autowired
     @Qualifier("webIdentityService")
     private WebIdentityService webIdentityService;
+
+    @Autowired
+    @Qualifier("emailService")
+    private EmailService emailService;
 
     //@RequestParam необходим для подстановки из UrlQuery
     //spring.mvc.pathmatch.use-suffix-pattern=true в properties для работы расширений
@@ -73,6 +78,11 @@ public class RestActivityController {
         activityService.removeArtist(activity, artist);
     }
 
+    @RequestMapping(value = MappingConstant.GET_ALL_ACTIVITIES, method = RequestMethod.GET)
+    public List<Activity> getAllActivities() {
+        return activityService.getAllActivities();
+    }
+
     @RequestMapping(value = MappingConstant.GET_UNUSED_ARTISTS, method = RequestMethod.GET)
     public List<Artist> findUnusedArtists(@PathVariable("activityId") int activityId) throws NotFoundException {
         Activity activity = activityService.getActivityById(activityId);
@@ -93,13 +103,14 @@ public class RestActivityController {
 
     @RequestMapping(value = MappingConstant.SUBSCRIBE, method = RequestMethod.POST)
     public void subscribeUser(@PathVariable("activityId") int activityId,
-                              @PathVariable("username") String username) throws LimitException, NotFoundException {
+                              @PathVariable("username") String username) throws Exception {
         Activity activity = activityService.getActivityById(activityId);
         WebIdentity user = webIdentityService.getUserByUsername(username);
         if (activity == null || user == null) {
             throw new NotFoundException();
         }
         activityService.subscribeUser(activity, user);
+        emailService.sendEmail(user.getEmail(), "Поздравляем", "Вы успешно зарегистрированы на фестиваль: " + activity.getName());
     }
 
     @RequestMapping(value = MappingConstant.UNSUBSCRIBE, method = RequestMethod.POST)

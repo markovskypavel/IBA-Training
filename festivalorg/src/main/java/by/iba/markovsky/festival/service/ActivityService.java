@@ -51,7 +51,7 @@ public class ActivityService {
     public void subscribeUser(Activity activity, WebIdentity webIdentity) throws LimitException {
         int capacity = Integer.valueOf(activity.getPlace().getCapacity());
         int size = activity.getUsers().size();
-        if (capacity < size) {
+        if (capacity <= size) {
             throw new LimitException("Capacity is less than participants quantity");
         }
         activity.getUsers().add(webIdentity);

@@ -32,6 +32,11 @@ public class RestArtistController {
         return artist;
     }
 
+    @RequestMapping(value = MappingConstant.GET_ALL_ARTISTS, method = RequestMethod.GET)
+    public List<Artist> getAllArtists() {
+        return artistService.getAllArtists();
+    }
+
     //TODO: Разобраться в кукисах
 /*    TODO: Кратчайшая история времени.
     Я не разобрался, если не смогу глупому человеку объяснить.

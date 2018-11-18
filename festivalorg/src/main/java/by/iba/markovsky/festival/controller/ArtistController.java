@@ -52,7 +52,7 @@ public class ArtistController {
     @RequestMapping(value = MappingConstant.ADD_ARTIST, method = RequestMethod.POST, params = "edit")
     public String editArtist(@Valid @ModelAttribute(value = "artist") Artist artist, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return HTMLConstant.ARTIST_PAGE;
+            return HTMLConstant.ARTIST_PAGE_EDIT;
         }
         artistService.addOrUpdateArtist(artist);
         return "redirect:" + MappingConstant.HOME;

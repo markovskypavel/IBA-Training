@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="ru"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header (requireData = @{/js/main})"></head>
+<body>
+<div id="wrapper">
+    <div lang="ru" th:replace="fragments/navigation :: navigation"></div>
+    <div class="content" id="content"></div>
+    <div lang="ru" th:replace="fragments/footer :: footer"></div>
+</div>
+</body>
+</html>

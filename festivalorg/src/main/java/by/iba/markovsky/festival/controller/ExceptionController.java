@@ -2,6 +2,7 @@ package by.iba.markovsky.festival.controller;
 
 import by.iba.markovsky.festival.constant.HTMLConstant;
 import by.iba.markovsky.festival.constant.MappingConstant;
+import by.iba.markovsky.festival.exception.LimitException;
 import by.iba.markovsky.festival.exception.NotFoundException;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -20,9 +21,16 @@ import javax.servlet.http.HttpServletResponse;
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class ExceptionController {
 
-    @ExceptionHandler({Exception.class})
-    public RedirectView handleException() {
-        return new RedirectView(MappingConstant.ERROR);
+    @ExceptionHandler(Exception.class)
+    public ModelAndView handleException(HttpServletResponse response) {
+        response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
+        return new ModelAndView(HTMLConstant.ERROR_PAGE);
+    }
+
+    @ExceptionHandler(LimitException.class)
+    public ModelAndView handleLimitException(HttpServletResponse response) {
+        response.setStatus(HttpStatus.I_AM_A_TEAPOT.value());
+        return new ModelAndView(HTMLConstant.ERROR_PAGE);
     }
 
 /*    TODO: Warning: when using this annotation on an exception class, or when setting the reason attribute

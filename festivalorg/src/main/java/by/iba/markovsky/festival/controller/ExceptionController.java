@@ -8,10 +8,8 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -28,9 +26,10 @@ public class ExceptionController {
     }
 
     @ExceptionHandler(LimitException.class)
-    public ModelAndView handleLimitException(HttpServletResponse response) {
+    @ResponseBody
+    public LimitException handleLimitException(HttpServletResponse response, LimitException le) {
         response.setStatus(HttpStatus.I_AM_A_TEAPOT.value());
-        return new ModelAndView(HTMLConstant.ERROR_PAGE);
+        return le;
     }
 
 /*    TODO: Warning: when using this annotation on an exception class, or when setting the reason attribute

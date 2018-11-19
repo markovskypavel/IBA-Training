@@ -9,6 +9,7 @@ import by.iba.markovsky.festival.model.enumeration.ActivityType;
 import by.iba.markovsky.festival.repository.ActivityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,8 +21,8 @@ import java.util.Optional;
 /*rollback for unchecked exception (transaction cancelled)*/
 public class ActivityService {
 
-/*    @Value("${generator.service.strings.count}")
-    private int stringsCount;*/
+    @Value("${activity.service.artists.limit}")
+    private int limitOfArtists;
 
     @Autowired
     @Qualifier("activityRepository")
@@ -52,7 +53,7 @@ public class ActivityService {
         int capacity = Integer.valueOf(activity.getPlace().getCapacity());
         int size = activity.getUsers().size();
         if (capacity <= size) {
-            throw new LimitException("Capacity is less than participants quantity");
+            throw new LimitException("Превышен лимит участников для места!");
         }
         activity.getUsers().add(webIdentity);
         activityRepository.save(activity);
@@ -62,7 +63,17 @@ public class ActivityService {
         activityRepository.save(activity);
     }
 
-    public void addArtist(Activity activity, Artist artist) {
+    public void addArtist(Activity activity, Artist artist) throws LimitException {
+        //Check if artist has more than 2 activities
+        int amount = 0;
+        for(Activity artistsActivity : artist.getActivities()){
+            if(activity.getDate().equals(artistsActivity.getDate())){
+                amount++;
+            }
+        }
+        if (amount >= limitOfArtists) {
+            throw new LimitException("Превышен лимит событий на день для артиста!");
+        }
         activity.getArtists().add(artist);
         activityRepository.save(activity);
     }

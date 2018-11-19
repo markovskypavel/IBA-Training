@@ -58,7 +58,7 @@ public class RestActivityController {
 
     @RequestMapping(value = MappingConstant.ADD_ACTIVITY_ARTIST, method = RequestMethod.POST)
     public void addActivityArtist(@PathVariable("activityId") int activityId,
-                                  @PathVariable("artistId") int artistId) throws NotFoundException {
+                                  @PathVariable("artistId") int artistId) throws Exception {
         Activity activity = activityService.getActivityById(activityId);
         Artist artist = artistService.getArtistById(artistId);
         if (activity == null || artist == null) {

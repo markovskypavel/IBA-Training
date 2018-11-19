@@ -48,7 +48,7 @@ public class ArtistController {
         artistService.addOrUpdateArtist(artist);
         return "redirect:" + MappingConstant.HOME;
     }
-
+    //TODO: Маппинг сделать на страницы верный, добавить подписку незареганного юзера, гугл мапс, фронт с fetch, сделать более удобный ui, добавить label на поля и убрать кнопки админа и фестиваля
     @RequestMapping(value = MappingConstant.ADD_ARTIST, method = RequestMethod.POST, params = "edit")
     public String editArtist(@Valid @ModelAttribute(value = "artist") Artist artist, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {

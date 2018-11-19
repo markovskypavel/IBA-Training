@@ -16,7 +16,9 @@ define("transport", ['jquery'], function ($) {
                     } else if (response.status === 500) {
                         location.href = $('#contextPathHolder').data("contextpath") + 'error';
                     } else if (response.status === 418) {
-                        alert('Извините, места на мероприятия закончились!');
+                        response.json().then(function (exp) {
+                            alert(exp.message);
+                        });
                     } else {
                         location.reload();
                     }

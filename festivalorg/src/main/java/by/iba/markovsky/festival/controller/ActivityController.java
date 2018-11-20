@@ -41,28 +41,24 @@ public class ActivityController {
 
     //Params необходим для определения конкретной кнопки
     @RequestMapping(value = MappingConstant.ADD_ACTIVITY, method = RequestMethod.POST, params = "add")
-    public String addActivity(@Valid @ModelAttribute(value = "activity") Activity activity,
-                              BindingResult bindingResult, HttpServletRequest req) {
+    public String addActivity(@Valid @ModelAttribute(value = "activity") Activity activity, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return HTMLConstant.ACTIVITY_PAGE;
         }
         if (activityService.getActivityByName(activity.getName()) != null) {
             return "redirect:" + MappingConstant.ADD_ACTIVITY + MappingConstant.ERROR_QUERY;
         }
-        activityService.setType(activity, req.getParameter("festival") != null);
         activityService.addOrUpdateAdctivity(activity);
-        return "redirect:" + MappingConstant.HOME;
+        return "redirect:" + MappingConstant.ADMIN;
     }
 
     @RequestMapping(value = MappingConstant.ADD_ACTIVITY, method = RequestMethod.POST, params = "edit")
-    public String editActivity(@Valid @ModelAttribute(value = "activity") Activity activity,
-                              BindingResult bindingResult, HttpServletRequest req) {
+    public String editActivity(@Valid @ModelAttribute(value = "activity") Activity activity, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return HTMLConstant.ACTIVITY_PAGE_EDIT;
         }
-        activityService.setType(activity, req.getParameter("festival") != null);
         activityService.addOrUpdateAdctivity(activity);
-        return "redirect:" + MappingConstant.HOME;
+        return "redirect:" + MappingConstant.ADMIN;
     }
 
 }

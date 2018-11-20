@@ -36,15 +36,13 @@ public class UserDetailsController {
     }
 
     @RequestMapping(value = MappingConstant.REGISTRATION, method = RequestMethod.POST)
-    public String registration(@Valid @ModelAttribute(value = "webIdentity") WebIdentity webIdentity,
-                               BindingResult bindingResult, HttpServletRequest req) {
+    public String registration(@Valid @ModelAttribute(value = "webIdentity") WebIdentity webIdentity, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return HTMLConstant.REGISTRATION_PAGE;
         }
         if (webIdentityService.getUserByUsername(webIdentity.getUsername()) != null) {
             return "redirect:" + MappingConstant.REGISTRATION + MappingConstant.ERROR_QUERY;
         }
-        webIdentityService.setRole(webIdentity, req.getParameter("admin") != null);
         webIdentityService.addOrUpdateWebIdentity(webIdentity);
         return HTMLConstant.LOGIN_PAGE;
     }

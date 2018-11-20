@@ -1,6 +1,7 @@
 package by.iba.markovsky.festival.configuration;
 
 import by.iba.markovsky.festival.service.UserDetailsServiceImpl;
+import by.iba.markovsky.festival.util.EncryptedPasswordUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,10 +25,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-/*        auth.inMemoryAuthentication()
+        // Default admin role
+        auth.inMemoryAuthentication()
                 .withUser("admin")
-                .password("admin")
-                .roles("ADMIN");*/
+                .password(EncryptedPasswordUtil.encrytePassword("admin"))
+                .roles("ADMIN");
         // Setting Service to find User in the database. And Setting PassswordEncoder.
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }

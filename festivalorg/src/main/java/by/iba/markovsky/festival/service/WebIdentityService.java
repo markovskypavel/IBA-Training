@@ -25,13 +25,6 @@ public class WebIdentityService {
         webIdentity.setPassword(EncryptedPasswordUtil.encrytePassword(webIdentity.getUnencryptedPassword()));
         webIdentityRepository.save(webIdentity);
     }
-    public void setRole(WebIdentity webIdentity, boolean isAdmin) {
-        if (isAdmin) {
-            webIdentity.setRoleType(RoleType.ROLE_ADMIN);
-        } else {
-            webIdentity.setRoleType(RoleType.ROLE_USER);
-        }
-    }
     public void deleteActivity(int id) {
         Optional<WebIdentity> user = webIdentityRepository.findById(id);
         user.ifPresent(userToDelete -> webIdentityRepository.delete(userToDelete));

@@ -13,6 +13,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.PrePersist;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,13 +33,6 @@ public class ActivityService {
 
     public void addOrUpdateAdctivity(Activity activity) {
         activityRepository.save(activity);
-    }
-    public void setType(Activity activity, boolean isFestival) {
-        if (isFestival) {
-            activity.setActivityType(ActivityType.FESTIVAL);
-        } else {
-            activity.setActivityType(ActivityType.CONCERT);
-        }
     }
     public void deleteActivity(Activity activity) {
         //For many-to-many delete we have to unlink the child's/parent's entities

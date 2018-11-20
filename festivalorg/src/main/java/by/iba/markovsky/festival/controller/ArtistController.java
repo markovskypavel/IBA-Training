@@ -46,16 +46,16 @@ public class ArtistController {
             return "redirect:" + MappingConstant.ADD_ARTIST + MappingConstant.ERROR_QUERY;
         }
         artistService.addOrUpdateArtist(artist);
-        return "redirect:" + MappingConstant.HOME;
+        return "redirect:" + MappingConstant.ADMIN;
     }
-    //TODO: Маппинг сделать на страницы верный, добавить подписку незареганного юзера, гугл мапс, фронт с fetch, сделать более удобный ui, добавить label на поля и убрать кнопки админа и фестиваля
+    //TODO: Маппинг сделать на страницы верный, добавить подписку незареганного юзера, гугл мапс, фронт с fetch, сделать более удобный ui
     @RequestMapping(value = MappingConstant.ADD_ARTIST, method = RequestMethod.POST, params = "edit")
     public String editArtist(@Valid @ModelAttribute(value = "artist") Artist artist, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return HTMLConstant.ARTIST_PAGE_EDIT;
         }
         artistService.addOrUpdateArtist(artist);
-        return "redirect:" + MappingConstant.HOME;
+        return "redirect:" + MappingConstant.ADMIN;
     }
 
 }

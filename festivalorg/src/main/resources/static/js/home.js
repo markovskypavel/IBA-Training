@@ -2,13 +2,14 @@ require.config({
     baseUrl: "/js",
     paths: {
         "jquery": "libs/jquery",
+        "slider": "modules/slider",
         "navbar": "modules/navbar",
-        "dataadmin": "modules/data/dataadmin",
+        "datahome": "modules/data/datahome",
         "dataview": "modules/data/dataview",
         "request": "modules/data/request"
     }
 });
 
-require(['dataadmin', 'navbar'], function (reload) {
+require(['datahome', 'navbar', 'slider'], function (reload) {
     reload();
 });

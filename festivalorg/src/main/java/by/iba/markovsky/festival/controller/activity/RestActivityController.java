@@ -1,4 +1,4 @@
-package by.iba.markovsky.festival.controller;
+package by.iba.markovsky.festival.controller.activity;
 
 import by.iba.markovsky.festival.constant.MappingConstant;
 import by.iba.markovsky.festival.exception.LimitException;

@@ -1,4 +1,4 @@
-package by.iba.markovsky.festival.controller;
+package by.iba.markovsky.festival.controller.artist;
 
 import by.iba.markovsky.festival.constant.MappingConstant;
 import by.iba.markovsky.festival.exception.NotFoundException;

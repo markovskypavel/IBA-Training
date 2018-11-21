@@ -1,4 +1,4 @@
-package by.iba.markovsky.festival.controller;
+package by.iba.markovsky.festival.controller.artist;
 
 import by.iba.markovsky.festival.constant.HTMLConstant;
 import by.iba.markovsky.festival.constant.MappingConstant;
@@ -48,7 +48,7 @@ public class ArtistController {
         artistService.addOrUpdateArtist(artist);
         return "redirect:" + MappingConstant.ADMIN;
     }
-    //TODO: Маппинг сделать на страницы верный, добавить подписку незареганного юзера, гугл мапс, фронт с fetch, сделать более удобный ui
+    //TODO: гугл мапс, сделать более удобный ui, пересмотреть js load
     @RequestMapping(value = MappingConstant.ADD_ARTIST, method = RequestMethod.POST, params = "edit")
     public String editArtist(@Valid @ModelAttribute(value = "artist") Artist artist, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {

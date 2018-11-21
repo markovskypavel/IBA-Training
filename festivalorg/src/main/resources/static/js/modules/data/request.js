@@ -1,7 +1,8 @@
-define("transport", ['jquery'], function ($) {
+define("request", ['jquery'], function ($) {
 
     return {
-        postFetch: function (url) {
+
+        postFetch: function (url, callbackReload) {
             return fetch(url, {
                 method: 'POST',
                 credentials: 'include',
@@ -20,13 +21,14 @@ define("transport", ['jquery'], function ($) {
                             alert(exp.message);
                         });
                     } else {
-                        location.reload();
+                        callbackReload();
                     }
                 })
                 .catch(function (error) {
                     console.log(error);
                 });
         },
+
         getFetch: function (url, callbackHTML) {
             return fetch(url, {
                 method: 'GET',
@@ -38,6 +40,8 @@ define("transport", ['jquery'], function ($) {
                 .then((resp) => resp.json())
                 .then(function (data) {
                     $('section').append(callbackHTML(data));
+                })
+                .then(function () {
                     $('.visible').bind("click", function () {
                         $('#win').animate({opacity: '0'}, 600, function () {
                             $('#win').remove();
@@ -49,9 +53,11 @@ define("transport", ['jquery'], function ($) {
                     console.log(error);
                 });
         },
+
         nextPage: function (url) {
             location.href = url;
         }
+
     };
 
 });

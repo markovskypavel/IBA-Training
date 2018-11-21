@@ -38,8 +38,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
 
+        //TODO: Сделать маппинг security
         // The pages does not require login
-        http.authorizeRequests().antMatchers(HOME, ABOUT_US, LOGIN, DENIED, NOT_FOUND, REGISTRATION, ERROR, GET_ACTIVITY, GET_ARTIST).permitAll();
+        http.authorizeRequests().antMatchers(HOME, ABOUT_US, LOGIN, DENIED, NOT_FOUND, REGISTRATION, ERROR, GET_ACTIVITY, GET_ARTIST, LOAD_DATA_HOME).permitAll();
         //For authenticated users
         http.authorizeRequests().antMatchers(SUBSCRIBE, UNSUBSCRIBE, LOGOUT).access("isAuthenticated()");
 
@@ -49,7 +50,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         // For ADMIN only.
         http.authorizeRequests().antMatchers(ADMIN, ADD_ACTIVITY, EDIT_ACTIVITY, DELETE_ACTIVITY,
-                ADD_ARTIST, EDIT_ARTIST, DELETE_ARTIST, ADD_ACTIVITY_ARTIST, REMOVE_ACTIVITY_ARTIST, GET_UNUSED_ARTISTS, GET_USED_ARTISTS).access("hasRole('ADMIN')");
+                ADD_ARTIST, EDIT_ARTIST, DELETE_ARTIST, ADD_ACTIVITY_ARTIST, REMOVE_ACTIVITY_ARTIST, GET_UNUSED_ARTISTS, GET_USED_ARTISTS, LOAD_DATA_ADMIN).access("hasRole('ADMIN')");
 
         // When the user has logged in as XX.
         // But access a page that requires role YY,

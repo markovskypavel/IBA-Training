@@ -1,30 +1,12 @@
 <!DOCTYPE html>
 <html lang="ru"
       xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-<head th:replace="fragments/header :: header (requireData = @{/js/main})"></head>
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header (requireData = @{/js/user})"></head>
 <body>
 <div id="wrapper">
     <div lang="ru" th:replace="fragments/navigation :: navigation"></div>
-
-    <section class="activityUserSection">
-        <div class="activity" th:if="${activities.isEmpty()}">
-            <p>События отсутствуют</p>
-        </div>
-        <div class="activity" th:each="activity : ${activities}">
-            <h2 th:utext="'<u>' + ${activity.activityType} + '</u>: ' + ${activity.name}"></h2>
-            <p th:utext="'<u>Дата проведения</u>: ' + ${#dates.format(activity.date, 'dd-MM-yyyy')}"></p>
-            <p th:utext="'<u>Место</u>: ' + ${activity.place.address}"></p>
-            <div class="activityWork">
-                <input type="button" name="more" th:value="Подробнее" th:attr="data-url=@{/activities/__${activity.id}__}">
-                <input type="button" name="unsubscribe" th:value="Отписаться"
-                       th:attr="data-url=@{/activities/__${activity.id}__/users/__${#authentication.getPrincipal().getUsername()}__/unsubscribe}">
-            </div>
-        </div>
-
-    </section>
-
+    <div id="user"></div>
     <div lang="ru" th:replace="fragments/footer :: footer"></div>
     <!--TODO: Long request(30sec) для уведомлений-->
 </div>

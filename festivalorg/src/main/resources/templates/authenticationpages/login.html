@@ -1,10 +1,23 @@
 <!DOCTYPE html>
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/header :: header (requireData = @{/js/secondary})"></head>
+<head th:replace="fragments/header :: header (requireData = @{/js/util})"></head>
 <body>
 <div id="wrapper">
     <div lang="ru" th:replace="fragments/navigation :: navigation"></div>
-    <div lang="ru" th:replace="fragments/authorization :: authorization"></div>
+
+    <div class="auth">
+        <h2>Авторизация</h2>
+        <form name='authForm' th:action="@{/j_spring_security_check}" method='POST'>
+            <label for="username">Логин</label>
+            <input type="text" id="username" name="username" placeholder="логин" required>
+            <label for="password">Пароль</label>
+            <input type="password" id="password" name="password" placeholder="пароль" required>
+            <span class="error" th:if="${#request.getParameter('error') == 'true'}">Неправильный логин или пароль</span>
+            <div><input type="submit" name="submit" value="Войти"></div>
+            <div><a th:href="@{/users/registration}">Создать учётную запись?</a></div>
+        </form>
+    </div>
+
     <div lang="ru" th:replace="fragments/footer :: footer"></div>
     <!--TODO: Сделать remember me-->
 </div>

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/header :: header (requireData = @{/js/secondary})"></head>
+<head th:replace="fragments/header :: header (requireData = @{/js/util})"></head>
 <body>
 <div id="wrapper">
     <div lang="ru" th:replace="fragments/navigation :: navigation"></div>
-    <div lang="ru" th:replace="fragments/artistedit :: artistedit(action='edit')"></div>
+    <div lang="ru" th:replace="fragments/edit/artistedit :: artistedit(action='edit')"></div>
     <div lang="ru" th:replace="fragments/footer :: footer"></div>
 </div>
 </body>

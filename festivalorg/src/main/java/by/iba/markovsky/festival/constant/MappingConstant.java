@@ -39,4 +39,9 @@ public interface MappingConstant {
     String NOT_FOUND = "/404";
     String ERROR = "/error";
     String ERROR_QUERY = "?error=true";
+
+    //Data load routing
+    String LOAD_DATA_HOME = "/load/home";
+    String LOAD_DATA_ADMIN = "/load/admin";
+    String LOAD_DATA_USER = "/load/user";
 }

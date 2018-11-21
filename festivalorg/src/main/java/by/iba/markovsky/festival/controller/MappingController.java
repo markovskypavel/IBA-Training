@@ -22,21 +22,8 @@ import java.security.Principal;
 @Controller
 public class MappingController {
 
-    @Autowired
-    @Qualifier("activityService")
-    private ActivityService activityService;
-
-    @Autowired
-    @Qualifier("artistService")
-    private ArtistService artistService;
-
     @RequestMapping(value = MappingConstant.HOME, method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView home(HttpServletRequest req, HttpServletResponse resp, Model model, Principal principal) {
-        if(principal != null){
-            User loginedUser = (User) ((Authentication) principal).getPrincipal();
-            model.addAttribute("userActivities", activityService.getAllActivitiesByUsername(loginedUser.getUsername()));
-        }
-        model.addAttribute("activities", activityService.getAllActivities());
+    public ModelAndView home() {
         return new ModelAndView(HTMLConstant.HOME_PAGE);
     }
 
@@ -46,16 +33,12 @@ public class MappingController {
     }
 
     @RequestMapping(value = MappingConstant.ADMIN, method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView admin(Model model) {
-        model.addAttribute("activities", activityService.getAllActivities());
-        model.addAttribute("artists", artistService.getAllArtists());
+    public ModelAndView admin() {
         return new ModelAndView(HTMLConstant.ADMIN_PAGE);
     }
 
     @RequestMapping(value = MappingConstant.USER, method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView user(Principal principal, Model model) {
-        User loginedUser = (User) ((Authentication) principal).getPrincipal();
-        model.addAttribute("activities", activityService.getAllActivitiesByUsername(loginedUser.getUsername()));
+    public ModelAndView user() {
         return new ModelAndView(HTMLConstant.USER_PAGE);
     }
 

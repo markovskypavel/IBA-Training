@@ -3,12 +3,12 @@ require.config({
     paths: {
         "jquery": "libs/jquery",
         "navbar": "modules/navbar",
-        "dataadmin": "modules/data/dataadmin",
+        "datauser": "modules/data/datauser",
         "dataview": "modules/data/dataview",
         "request": "modules/data/request"
     }
 });
 
-require(['dataadmin', 'navbar'], function (reload) {
+require(['datauser', 'navbar'], function (reload) {
     reload();
 });

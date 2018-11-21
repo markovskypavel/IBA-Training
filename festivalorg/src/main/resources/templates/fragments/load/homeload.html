@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ru"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<div id="home" th:fragment="homeload">
+    <div class="activity" th:if="${activities.isEmpty()}">
+        <p>События отсутствуют</p>
+    </div>
+
+    <div class="activity" th:each="activity : ${activities}">
+        <h2 th:utext="'<u>' + ${activity.activityType} + '</u>: ' + ${activity.name}"></h2>
+        <p th:utext="'<u>Дата проведения</u>: ' + ${#dates.format(activity.date, 'dd-MM-yyyy')}"></p>
+        <p th:utext="'<u>Место</u>: ' + ${activity.place.address}"></p>
+        <div class="activityWork">
+            <input type="button" name="more" th:value="Подробнее" th:attr="data-url=@{/activities/__${activity.id}__}">
+            <input type="button" name="subscribe" sec:authorize="isAuthenticated()"
+                   th:if="${!userActivities.contains(activity)}" th:value="Подписаться"
+                   th:attr="data-url=@{/activities/__${activity.id}__/users/__${#authentication.getPrincipal().getUsername()}__/subscribe}">
+            <input type="button" name="unsubscribe" sec:authorize="isAuthenticated()"
+                   th:if="${userActivities.contains(activity)}" th:value="Отписаться"
+                   th:attr="data-url=@{/activities/__${activity.id}__/users/__${#authentication.getPrincipal().getUsername()}__/unsubscribe}">
+        </div>
+    </div>
+</div>
+</html>

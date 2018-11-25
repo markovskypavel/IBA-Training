@@ -3,6 +3,15 @@ define("dataadmin", ['jquery', 'request', 'dataview'], function ($, request, dat
     return function loadAllAdmin() {
         $('#admin')
             .load($('#contextPathHolder').data("contextpath") + 'load/admin', function () {
+                /* Dropdown artist */
+                $('input[name=dropbtnartist]').on("click", function () {
+                    $('#dropdownArtist').toggleClass("show");
+                });
+
+                /* Dropdown artist */
+                $('input[name=dropbtnactivity]').on("click", function () {
+                    $('#dropdownActivity').toggleClass("show");
+                });
 
                 /* Вывод информации о событиях в модальное окно + анимация затемнения */
                 $('input[name=more]').on("click", function () {

@@ -3,6 +3,7 @@ package by.iba.markovsky.festival.configuration;
 import by.iba.markovsky.festival.service.UserDetailsServiceImpl;
 import by.iba.markovsky.festival.util.EncryptedPasswordUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -18,6 +19,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
 
+    @Value("${user.admin.username}")
+    private String adminUsername;
+    @Value("${user.admin.password}")
+    private String adminPassword;
+
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -27,8 +33,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         // Default admin role
         auth.inMemoryAuthentication()
-                .withUser("admin")
-                .password(EncryptedPasswordUtil.encrytePassword("admin"))
+                .withUser(adminUsername)
+                .password(EncryptedPasswordUtil.encrytePassword(adminPassword))
                 .roles("ADMIN");
         // Setting Service to find User in the database. And Setting PassswordEncoder.
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
@@ -38,15 +44,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
 
-        //TODO: Сделать маппинг security
         // The pages does not require login
-        http.authorizeRequests().antMatchers(HOME, ABOUT_US, LOGIN, DENIED, NOT_FOUND, REGISTRATION, ERROR, GET_ACTIVITY, GET_ARTIST, LOAD_DATA_HOME).permitAll();
+        http.authorizeRequests().antMatchers(HOME, ABOUT_US, LOGIN, DENIED, NOT_FOUND, REGISTRATION, ERROR, GET_ACTIVITY, GET_ARTIST, GET_ALL_ARTISTS, LOAD_DATA_HOME, GET_ALL_ACTIVITIES).permitAll();
         //For authenticated users
-        http.authorizeRequests().antMatchers(SUBSCRIBE, UNSUBSCRIBE, LOGOUT).access("isAuthenticated()");
+        http.authorizeRequests().antMatchers(LOGOUT).access("isAuthenticated()");
 
         // If no login, it will redirect to /login page.
         // For USER only.
-        http.authorizeRequests().antMatchers(USER).access("hasAnyRole('USER')");
+        http.authorizeRequests().antMatchers(USER, SUBSCRIBE, UNSUBSCRIBE, LOAD_DATA_USER).access("hasAnyRole('USER')");
 
         // For ADMIN only.
         http.authorizeRequests().antMatchers(ADMIN, ADD_ACTIVITY, EDIT_ACTIVITY, DELETE_ACTIVITY,

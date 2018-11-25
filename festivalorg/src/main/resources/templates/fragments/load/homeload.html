@@ -14,10 +14,10 @@
         <p th:utext="'<u>Место</u>: ' + ${activity.place.address}"></p>
         <div class="activityWork">
             <input type="button" name="more" th:value="Подробнее" th:attr="data-url=@{/activities/__${activity.id}__}">
-            <input type="button" name="subscribe" sec:authorize="isAuthenticated()"
+            <input type="button" name="subscribe" sec:authorize="hasRole('USER')"
                    th:if="${!userActivities.contains(activity)}" th:value="Подписаться"
                    th:attr="data-url=@{/activities/__${activity.id}__/users/__${#authentication.getPrincipal().getUsername()}__/subscribe}">
-            <input type="button" name="unsubscribe" sec:authorize="isAuthenticated()"
+            <input type="button" name="unsubscribe" sec:authorize="hasRole('USER')"
                    th:if="${userActivities.contains(activity)}" th:value="Отписаться"
                    th:attr="data-url=@{/activities/__${activity.id}__/users/__${#authentication.getPrincipal().getUsername()}__/unsubscribe}">
         </div>

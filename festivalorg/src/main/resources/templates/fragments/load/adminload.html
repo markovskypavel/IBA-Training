@@ -12,8 +12,15 @@
             <p th:utext="'<u>Жанр</u>: ' + ${artist.genre}"></p>
             <div class="activityWork">
                 <input type="button" name="moreArtist" th:value="Подробнее" th:attr="data-url=@{/artists/__${artist.id}__}">
-                <input type="button" name="deleteArtist" th:value="Удалить" th:attr="data-url=@{/artists/__${artist.id}__/delete}">
-                <input type="button" name="editArtist" th:value="Редактировать" th:attr="data-url=@{/artists/__${artist.id}__/edit}">
+
+                <div class="dropdown">
+                    <input type="button" class="dropbtn" name="dropbtnartist" value="Действия">
+                    <div id="dropdownArtist" class="dropdown-content">
+                        <input type="button" name="deleteArtist" th:value="Удалить" th:attr="data-url=@{/artists/__${artist.id}__/delete}">
+                        <input type="button" name="editArtist" th:value="Редактировать" th:attr="data-url=@{/artists/__${artist.id}__/edit}">
+                    </div>
+                </div>
+
             </div>
         </div>
     </aside>
@@ -34,12 +41,17 @@
             <p th:utext="'<u>Место</u>: ' + ${activity.place.address}"></p>
             <div class="activityWork">
                 <input type="button" name="more" th:value="Подробнее" th:attr="data-url=@{/activities/__${activity.id}__}">
-                <input type="button" name="deleteActivity" th:value="Удалить" th:attr="data-url=@{/activities/__${activity.id}__/delete}">
-                <input type="button" name="editActivity" th:value="Редактировать" th:attr="data-url=@{/activities/__${activity.id}__/edit}">
-            </div>
-            <div class="activityWork">
-                <input type="button" name="addActivityArtist" th:value="'Добавить артиста'" th:attr="data-url=@{/activities/__${activity.id}__/artists/unused}">
-                <input type="button" name="deleteActivityArtist" th:value="'Удалить артиста'" th:attr="data-url=@{/activities/__${activity.id}__/artists/used}">
+
+                <div class="dropdown">
+                    <input type="button" class="dropbtn" name="dropbtnactivity" value="Действия">
+                    <div id="dropdownActivity" class="dropdown-content">
+                        <input type="button" name="deleteActivity" th:value="Удалить" th:attr="data-url=@{/activities/__${activity.id}__/delete}">
+                        <input type="button" name="editActivity" th:value="Редактировать" th:attr="data-url=@{/activities/__${activity.id}__/edit}">
+                        <input type="button" name="addActivityArtist" th:value="'Подписать артиста'" th:attr="data-url=@{/activities/__${activity.id}__/artists/unused}">
+                        <input type="button" name="deleteActivityArtist" th:value="'Отписать артиста'" th:attr="data-url=@{/activities/__${activity.id}__/artists/used}">
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>

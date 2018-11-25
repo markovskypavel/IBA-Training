@@ -38,6 +38,7 @@ public class WebIdentity implements Serializable {
     @Column(name = "username", nullable = false)
     private String username;
 
+    @Transient
     @Pattern(regexp = RegExConstant.PASSWORD)
     private String unencryptedPassword;
 
@@ -55,14 +56,15 @@ public class WebIdentity implements Serializable {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "role", nullable = false)
-    private RoleType roleType = RoleType.ROLE_ADMIN;
+    private RoleType roleType = RoleType.ROLE_USER;
 
     @Valid
     @ManyToOne(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     @JoinColumn(name = "identity_id", nullable = false)
     private Identity identity = new Identity();
 
-    //TODO: Лучше убрать many to many + У каждого поля права на доступ с angular или Для клиента свои, для сервера свои сущности
+    //Лучше убрать many to many.
+    // В angular у каждого поля права на доступ, для сервера существуют отдельные от клиента сущности
     @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.EAGER, mappedBy = "users")
     private Set<Activity> activities = new HashSet<>();
 
@@ -240,6 +242,7 @@ public class WebIdentity implements Serializable {
                 Objects.equals(identity, that.identity) &&
                 Objects.equals(activities, that.activities);
     }
+    //В Many-To-Many убрать в hashcode и tostring соответствующие поля по избежание рекурсии
     @Override
     public int hashCode() {
         return Objects.hash(id, username, unencryptedPassword, password, email, telephone, roleType, identity);

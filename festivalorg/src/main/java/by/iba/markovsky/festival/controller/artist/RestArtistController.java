@@ -37,15 +37,6 @@ public class RestArtistController {
         return artistService.getAllArtists();
     }
 
-    //TODO: Разобраться в кукисах
-/*    TODO: Кратчайшая история времени.
-    Я не разобрался, если не смогу глупому человеку объяснить.
-    Сешн-сервер, кукис-клиент(если идешь за печеньшем - крошки, если нет - то нет, они бегают с запросами)
-    Если появились кукис(в респонс хедерс), то что-то получил с сервера
-    Сессия - хешмап, привязанный к кукис
-    @Crossorigin
-    Front->actions->backend->check roles->return actions*/
-
     @RequestMapping(value = MappingConstant.DELETE_ARTIST, method = RequestMethod.POST)
     public void deleteArtist(@PathVariable("id") int id) throws NotFoundException {
         Artist artist = artistService.getArtistById(id);

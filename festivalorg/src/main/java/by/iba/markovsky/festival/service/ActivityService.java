@@ -31,8 +31,29 @@ public class ActivityService {
     @Qualifier("activityRepository")
     private ActivityRepository activityRepository;
 
-    public void addOrUpdateAdctivity(Activity activity) {
+    public void addActivity(Activity activity) {
         activityRepository.save(activity);
+    }
+    public void updateActivity(Activity activity) {
+        //REFRESH производит обновление объекта, который до этого был persist/save/load в рамках текущей сессии.
+        //MERGE же производит присоединение объекта, который был persist/save/load в рамках другой сессии, к текущей сессии.
+        //При этом сам объект к сессии не присоединятся, а метод merge возвращает новый объект связанный с сессией.
+
+        //Use update() if you are sure that the session does not contain an already persistent instance with the same identifier,
+        //and merge() if you want to merge your modifications at any time without consideration of the state of the session. In other words,
+        //update() is usually the first method you would call in a fresh session,
+        //ensuring that reattachment of your detached instances is the first operation that is executed.
+        Activity oldActivity = getActivityById(activity.getId());
+        if(oldActivity != null){
+            oldActivity.setActivityType(activity.getActivityType());
+            oldActivity.setName(activity.getName());
+            oldActivity.setDate(activity.getDate());
+            oldActivity.getPlace().setAddress(activity.getPlace().getAddress());
+            oldActivity.getPlace().setCapacity(activity.getPlace().getCapacity());
+            oldActivity.setDescription(activity.getDescription());
+
+            activityRepository.save(oldActivity);
+        }
     }
     public void deleteActivity(Activity activity) {
         //For many-to-many delete we have to unlink the child's/parent's entities

@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class FileUploadController {
 
-    //TODO: Просто сделать
+    //TODO: Unsupported for now
 /*    @Value("${generator.service.strings.count}")
     public String uploadDirectory = System.getProperty("user.dir")+"/uploads";
 

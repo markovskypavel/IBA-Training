@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @Controller
@@ -40,7 +39,7 @@ public class UserDetailsController {
         if (bindingResult.hasErrors()) {
             return HTMLConstant.REGISTRATION_PAGE;
         }
-        if (webIdentityService.getUserByUsername(webIdentity.getUsername()) != null) {
+        if (webIdentityService.checkUserExists(webIdentity.getUsername())) {
             return "redirect:" + MappingConstant.REGISTRATION + MappingConstant.ERROR_QUERY;
         }
         webIdentityService.addOrUpdateWebIdentity(webIdentity);

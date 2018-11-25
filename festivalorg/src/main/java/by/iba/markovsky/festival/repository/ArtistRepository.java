@@ -11,8 +11,8 @@ import java.util.List;
 @Repository("artistRepository")
 public interface ArtistRepository extends CrudRepository<Artist, Integer> {
     List<Artist> findAll();
-    List<Artist> findByActivitiesIsNotContaining(Activity activity);
     Artist findByName(String name);
-    //Searches in activity_has_webidentity
+    //Searches in activity_has_artist
     List<Artist> findByActivities_id(int id);
+    List<Artist> findByActivitiesIsNotContaining(Activity activity);
 }

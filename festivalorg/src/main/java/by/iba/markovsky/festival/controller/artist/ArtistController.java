@@ -4,6 +4,7 @@ import by.iba.markovsky.festival.constant.HTMLConstant;
 import by.iba.markovsky.festival.constant.MappingConstant;
 import by.iba.markovsky.festival.model.Artist;
 import by.iba.markovsky.festival.service.ArtistService;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -16,9 +17,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.util.logging.Logger;
 
 @Controller
 public class ArtistController {
+
+    //Logger logger = LoggerFactory.getLogger(ArtistController.class);
 
     @Autowired
     @Qualifier("artistService")
@@ -48,7 +52,6 @@ public class ArtistController {
         artistService.addOrUpdateArtist(artist);
         return "redirect:" + MappingConstant.ADMIN;
     }
-    //TODO: гугл мапс, сделать более удобный ui, пересмотреть js load
     @RequestMapping(value = MappingConstant.ADD_ARTIST, method = RequestMethod.POST, params = "edit")
     public String editArtist(@Valid @ModelAttribute(value = "artist") Artist artist, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {

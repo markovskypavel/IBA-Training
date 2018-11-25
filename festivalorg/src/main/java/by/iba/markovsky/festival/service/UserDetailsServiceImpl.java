@@ -23,10 +23,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private WebIdentityRepository webIdentityRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        WebIdentity webIdentity = webIdentityRepository.findByUsername(userName);
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        WebIdentity webIdentity = webIdentityRepository.findByUsername(username);
         if (webIdentity == null) {
-            throw new UsernameNotFoundException("User " + userName + " was not found in the database");
+            throw new UsernameNotFoundException("User " + username + " was not found in the database");
         }
 
         List<GrantedAuthority> grantList = new ArrayList<>();

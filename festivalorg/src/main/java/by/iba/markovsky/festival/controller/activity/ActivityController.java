@@ -52,7 +52,7 @@ public class ActivityController {
         if (activityService.getActivityByName(activity.getName()) != null) {
             return "redirect:" + MappingConstant.ADD_ACTIVITY + MappingConstant.ERROR_QUERY;
         }
-        activityService.addOrUpdateAdctivity(activity);
+        activityService.addActivity(activity);
         return "redirect:" + MappingConstant.ADMIN;
     }
 
@@ -61,7 +61,7 @@ public class ActivityController {
         if (bindingResult.hasErrors()) {
             return HTMLConstant.ACTIVITY_PAGE_EDIT;
         }
-        activityService.addOrUpdateAdctivity(activity);
+        activityService.updateActivity(activity);
         return "redirect:" + MappingConstant.ADMIN;
     }
 

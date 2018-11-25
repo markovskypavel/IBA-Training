@@ -32,7 +32,7 @@ public class ExceptionController {
         return le;
     }
 
-/*    TODO: Warning: when using this annotation on an exception class, or when setting the reason attribute
+/*  Warning: when using this annotation on an exception class, or when setting the reason attribute
     of this annotation, the HttpServletResponse.sendError method will be used. With
     HttpServletResponse.sendError, the response is considered complete and should not be written
     to any further. Furthermore, the Servlet container will typically write an HTML error page

@@ -20,7 +20,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @ApiModel(description="WebIdentity")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+/*@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")*/
 @XmlRootElement(name = "WebIdentity")
 @XmlType(propOrder = {"id","username","unencryptedPassword","password","email","telephone","roleType","identity"})
 @XmlSeeAlso({Identity.class, RoleType.class})

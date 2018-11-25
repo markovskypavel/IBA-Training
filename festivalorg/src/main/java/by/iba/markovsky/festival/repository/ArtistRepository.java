@@ -13,6 +13,6 @@ public interface ArtistRepository extends CrudRepository<Artist, Integer> {
     List<Artist> findAll();
     Artist findByName(String name);
     //Searches in activity_has_artist
-    List<Artist> findByActivities_id(int id);
+    List<Artist> findByActivitiesIsContaining(Activity activity);
     List<Artist> findByActivitiesIsNotContaining(Activity activity);
 }

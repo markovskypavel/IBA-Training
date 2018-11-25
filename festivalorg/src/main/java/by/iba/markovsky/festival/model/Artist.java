@@ -15,7 +15,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @ApiModel(description="Artist")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+/*@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")*/
 @XmlRootElement(name = "Artist")
 @XmlType(propOrder = {"id","name","genre"})
 @Entity

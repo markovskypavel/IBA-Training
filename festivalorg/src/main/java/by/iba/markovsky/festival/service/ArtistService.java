@@ -43,7 +43,7 @@ public class ArtistService {
         return artistRepository.findByActivitiesIsNotContaining(activity);
     }
     public List<Artist> getAllUsedArtists(Activity activity) {
-        return artistRepository.findByActivities_id(activity.getId());
+        return artistRepository.findByActivitiesIsContaining(activity);
     }
     public List<Artist> getAllArtists() {
         return artistRepository.findAll();

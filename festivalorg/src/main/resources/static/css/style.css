@@ -15,7 +15,7 @@ body {
 }
 /* Обёртка */
 #wrapper {
-    min-width: 850px; /* Задать ширину (убрать для флекса) */
+    min-width: 780px; /* Задать ширину (убрать для флекса) */
     margin: auto;
     box-sizing: border-box;
 }
@@ -353,7 +353,6 @@ footer p {
 aside {
     float: left;
     width: 250px;
-    margin-top: 20px;
 }
 /* FOUNDER */
 aside.founder {
@@ -535,6 +534,7 @@ option.list:hover {
     box-shadow: 0 0 10px 100px var(--contract-color) inset;
 }
 label {
+    display: block;
     font: 15px var(--contrast-font), sans-serif;
     color: var(--contract-color);
 }

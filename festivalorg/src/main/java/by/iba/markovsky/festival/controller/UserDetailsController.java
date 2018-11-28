@@ -43,7 +43,7 @@ public class UserDetailsController {
             return "redirect:" + MappingConstant.REGISTRATION + MappingConstant.ERROR_QUERY;
         }
         webIdentityService.addOrUpdateWebIdentity(webIdentity);
-        return HTMLConstant.LOGIN_PAGE;
+        return "redirect:" + HTMLConstant.LOGIN_PAGE;
     }
 
 }

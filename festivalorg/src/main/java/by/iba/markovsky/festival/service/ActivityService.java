@@ -31,6 +31,7 @@ public class ActivityService {
     @Qualifier("activityRepository")
     private ActivityRepository activityRepository;
 
+    /*@PreAuthorize("hasRole('ROLE_ADMIN')")*/
     public void addActivity(Activity activity) {
         activityRepository.save(activity);
     }
